@@ -3,19 +3,18 @@ import type { Config } from "tailwindcss";
 import forms from "@tailwindcss/forms";
 import typography from "@tailwindcss/typography";
 import { skeleton } from "@skeletonlabs/tw-plugin";
-import { CustomTheme } from "./src/custom-theme";
 
 enum Theme {
-  Skeleton = "skeleton",
-  Wintry = "wintry",
-  Modern = "modern",
-  Rocket = "rocket",
-  Seafoam = "seafoam",
-  Vintage = "vintage",
-  Sahara = "sahara",
+  // Skeleton = "skeleton",
+  // Wintry = "wintry",
+  // Modern = "modern",
+  // Rocket = "rocket",
+  // Seafoam = "seafoam",
+  // Vintage = "vintage",
+  // Sahara = "sahara",
   Hamlindigo = "hamlindigo",
-  GoldNouveau = "gold-nouveau",
-  Crimson = "crimson",
+  // GoldNouveau = "gold-nouveau",
+  // Crimson = "crimson",
 }
 
 export default {
@@ -41,7 +40,6 @@ export default {
           name: theme,
           enhancements: true,
         })),
-        custom: [CustomTheme],
       },
     }),
   ],

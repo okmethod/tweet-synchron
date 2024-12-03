@@ -3,11 +3,8 @@
   import { onMount } from "svelte";
   import { Toast, Modal, initializeStores } from "@skeletonlabs/skeleton";
   import { storePopup } from "@skeletonlabs/skeleton";
-  import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
   import { computePosition, autoUpdate, flip, shift, offset, arrow } from "@floating-ui/dom";
   import { goto } from "$app/navigation";
-  import { applyTheme } from "$lib/stores/theme";
-  import ThemeSwitchModal from "$lib/components/modals/ThemeSwitchModal.svelte";
   import IconButton from "$lib/components/IconButton.svelte";
 
   initializeStores();
@@ -15,25 +12,8 @@
 
   let isLoaded = false;
   onMount(async () => {
-    function wait(ms: number) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
-    }
-    await Promise.all([applyTheme(), wait(500)]);
     isLoaded = true;
   });
-
-  const modalStore = getModalStore();
-  function showThemeSwitchModal(): void {
-    const m: ModalSettings = {
-      type: "component",
-      component: {
-        ref: ThemeSwitchModal,
-        props: {},
-      },
-      backdropClasses: "fixed inset-0 !bg-gray-300/90",
-    };
-    modalStore.trigger(m);
-  }
 
   const cHeaderButton = "!space-x-0 !py-1 !px-2";
 </script>
@@ -51,7 +31,6 @@
       <div class="h-full flex items-center justify-between">
         <IconButton icon="mdi:home-outline" label="Home" cButton={cHeaderButton} onClick={() => goto("/")} />
         <div class="flex-grow"><!--spacer--></div>
-        <IconButton icon="mdi:menu" label="Theme" cButton={cHeaderButton} onClick={showThemeSwitchModal} />
       </div>
     </div>
 
