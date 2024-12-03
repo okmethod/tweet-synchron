@@ -1,6 +1,6 @@
 # tweet-synchron
 
-`gh-pages` ブランチの静的アセットを Github Pages で公開する。
+~~Firebase Hosting で SPA を公開する。~~ しない。
 
 ## ローカルでの起動方法
 
@@ -19,10 +19,15 @@
 - 静的アセットデプロイ
 
   ```sh
-  (cd skeleton-app && npm run build)
   (cd skeleton-app && npm run deploy)
+  ```
+
+- functionsデプロイ
+
+  ```sh
+  (cd functions && npm run deploy)
   ```
 
 - ブラウザでアクセス
 
-  https://okmethod.github.io/tweet-synchron/
+  https://okmethod-tweet-synchron.web.app/
