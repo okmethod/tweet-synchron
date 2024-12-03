@@ -1,8 +1,11 @@
 <script lang="ts">
-  let spells_by_yuse = ["hoge", "fuga", "piyo"];
-  let spells_by_jack = ["hoge", "fuga", "piyo"];
+  import type { SynchroSpellsMap } from "$lib/types/spells";
 
-  const cDivStyle = "w-full flex flex-col items-center space-y-4";
+  export let data: {
+    synchroSpellsMap: SynchroSpellsMap;
+  };
+
+  const cDivStyle = "w-full flex flex-col space-y-4";
   const cDuelistNameStyle = "text-xl bold underline";
   const cListStyle = "list-disc space-y-2";
 </script>
@@ -13,21 +16,15 @@
   </div>
 
   <div class="cContentPartStyle !space-y-6">
-    <div class={cDivStyle}>
-      <h2 class={cDuelistNameStyle}>不動 遊星</h2>
-      <ul class={cListStyle}>
-        {#each spells_by_yuse as spell}
-          <li>{spell}</li>
-        {/each}
-      </ul>
-    </div>
-    <div class={cDivStyle}>
-      <h2 class={cDuelistNameStyle}>ジャック・アトラス</h2>
-      <ul class={cListStyle}>
-        {#each spells_by_jack as spell}
-          <li>{spell}</li>
-        {/each}
-      </ul>
-    </div>
+    {#each Object.entries(data.synchroSpellsMap) as [duelist, spells]}
+      <div class={cDivStyle}>
+        <h2 class={cDuelistNameStyle}>{duelist}</h2>
+        <ul class={cListStyle}>
+          {#each spells as spell}
+            <li>{spell.spellText}</li>
+          {/each}
+        </ul>
+      </div>
+    {/each}
   </div>
 </div>
