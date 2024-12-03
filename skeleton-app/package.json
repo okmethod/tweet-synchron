@@ -18,6 +18,7 @@
     "deploy": "npm run build && npm run push"
   },
   "devDependencies": {
+    "@google/generative-ai": "^0.21.0",
     "@iconify/svelte": "^4.0.2",
     "@playwright/test": "^1.48.2",
     "@skeletonlabs/skeleton": "^2.10.2",
