@@ -4,10 +4,10 @@ import { GITHUB_REPO_URL } from "$lib/constants/common";
 
 const contentLinks: TransitionContent[] = [
   {
-    label: "Example route",
+    label: "Synchro Spell Generator",
     symbolSrc: { type: "icon", key: "mdi:page-next" },
     action: "navigate",
-    target: "/example",
+    target: "/generator",
   },
   {
     label: "Github Repository",

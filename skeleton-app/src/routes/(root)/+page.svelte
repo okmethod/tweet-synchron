@@ -9,7 +9,7 @@
 
 <div class="cRouteBodyStyle">
   <div class="cTitlePartStyle">
-    <h1 class="cTitleStyle">Welcome to My Static Site !</h1>
+    <h1 class="cTitleStyle">Tweet Synchron</h1>
   </div>
 
   <div class="cContentPartStyle">

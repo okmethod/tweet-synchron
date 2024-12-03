@@ -19,7 +19,7 @@
 </script>
 
 <svelte:head>
-  <title>My Static WebSite</title>
+  <title>Tweet Synchron</title>
 </svelte:head>
 
 <Modal />
