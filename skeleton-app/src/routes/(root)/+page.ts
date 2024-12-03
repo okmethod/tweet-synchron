@@ -5,9 +5,15 @@ import { GITHUB_REPO_URL } from "$lib/constants/common";
 const contentLinks: TransitionContent[] = [
   {
     label: "Synchro Spell Generator",
-    symbolSrc: { type: "icon", key: "mdi:page-next" },
+    symbolSrc: { type: "icon", key: "mdi:star-circle" },
     action: "navigate",
     target: "/generator",
+  },
+  {
+    label: "Legendary Synchro Spells",
+    symbolSrc: { type: "icon", key: "mdi:star-circle" },
+    action: "navigate",
+    target: "/legends",
   },
   {
     label: "Github Repository",
