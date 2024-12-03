@@ -1,4 +1,4 @@
-import { navigateTo } from "$lib/utils/navigation.client";
+import { goto } from "$app/navigation";
 
 type TransitionAction = "navigate" | "redirect" | "redirectNewTab";
 
@@ -41,7 +41,7 @@ export function isIconConfig(symbol: ImageConfig | IconConfig | null): symbol is
 
 function getOnClick(action: TransitionAction, target: string): () => void {
   const actions: { [key in TransitionAction]: () => void } = {
-    navigate: () => navigateTo(target),
+    navigate: () => goto(target),
     redirect: () => {
       window.location.href = target;
     },

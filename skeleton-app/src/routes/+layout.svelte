@@ -5,10 +5,10 @@
   import { storePopup } from "@skeletonlabs/skeleton";
   import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
   import { computePosition, autoUpdate, flip, shift, offset, arrow } from "@floating-ui/dom";
+  import { goto } from "$app/navigation";
   import { applyTheme } from "$lib/stores/theme";
   import ThemeSwitchModal from "$lib/components/modals/ThemeSwitchModal.svelte";
   import IconButton from "$lib/components/IconButton.svelte";
-  import { navigateTo } from "$lib/utils/navigation.client";
 
   initializeStores();
   storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
@@ -49,7 +49,7 @@
   <div class="h-screen flex flex-col">
     <div class="relative border-b border-gray-400 bg-gray-100 p-1">
       <div class="h-full flex items-center justify-between">
-        <IconButton icon="mdi:home-outline" label="Home" cButton={cHeaderButton} onClick={() => navigateTo("/")} />
+        <IconButton icon="mdi:home-outline" label="Home" cButton={cHeaderButton} onClick={() => goto("/")} />
         <div class="flex-grow"><!--spacer--></div>
         <IconButton icon="mdi:menu" label="Theme" cButton={cHeaderButton} onClick={showThemeSwitchModal} />
       </div>

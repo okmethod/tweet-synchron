@@ -25,10 +25,6 @@ const config = {
       precompress: false,
       strict: true,
     }),
-    paths: {
-      // Github Pagesで公開する場合は、base にリポジトリ名を指定
-      base: `/${githubRepoName}`,
-    },
   },
 };
 export default config;

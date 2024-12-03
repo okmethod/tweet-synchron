@@ -4,9 +4,7 @@ import { defineConfig } from "vite";
 import fs from "fs";
 import path from "path";
 
-const githubRepoName = "tweet-synchron";
-
-const content404 = ((base: string) => `
+const content404 = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +15,7 @@ const content404 = ((base: string) => `
   <script>
     // Redirect to the root URL
     var path = window.location.pathname;
-    var newUrl = window.location.origin + '/${base}/';
+    var newUrl = window.location.origin;
     window.location.replace(newUrl);
   </script>
 </head>
@@ -25,12 +23,13 @@ const content404 = ((base: string) => `
   <p>Redirecting...</p>
 </body>
 </html>
-`)(githubRepoName);
+`;
 
 export default defineConfig({
-  // Github Pagesで公開する場合は、base にリポジトリ名を指定
-  base: `/${githubRepoName}/`,
   publicDir: "static",
+  define: {
+    "process.env": process.env,
+  },
   build: {
     minify: "terser",
     terserOptions: {
