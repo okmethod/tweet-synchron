@@ -13,7 +13,7 @@ export async function load({ fetch }: LoadEvent): Promise<{
     if (!acc[remark.duelist]) {
       acc[remark.duelist] = [];
     }
-    acc[remark.duelist].push({ monster: remark.monster, text: remark.text });
+    acc[remark.duelist].push({ monster: remark.monster, summonType: remark.summonType, text: remark.text });
     return acc;
   }, {} as SummonRemarksMap);
 
