@@ -2,14 +2,17 @@
   import type { ModalComponent, ModalStore } from "@skeletonlabs/skeleton";
   import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
   import { fetchText } from "$lib/genlang/generateContent";
+  import { summonTypes, type SummonType } from "$lib/types/summons";
   import SubmitModal from "$lib/components/modals/SubmitModal.svelte";
   import IconButton from "$lib/components/IconButton.svelte";
 
   // TODO: プロンプトを調整する
   const prompt = (input: string) =>
     `あなたは歴戦のプロデュエリスト(決闘者)です。
-    あなたのエースモンスターである《${input}》をシンクロ召喚する際の、最高に盛り上がる口上を考えてください。
+    あなたのエースモンスターである《${input}》を${currentSummonType}する際の、最高に盛り上がる口上を考えてください。
     出力テキストは口上だけになるようにしてください。`;
+
+  let currentSummonType: SummonType = "シンクロ召喚";
 
   let inputText = "";
   let generatedText = "";
@@ -46,8 +49,13 @@
   </div>
 
   <div class="cContentPartStyle">
+    <input type="text" bind:value={inputText} placeholder="Input name here" class="w-full" />
     <div class="w-full flex space-x-2">
-      <input type="text" bind:value={inputText} placeholder="Input name here" class="w-full" />
+      <select class="w-full" bind:value={currentSummonType}>
+        {#each summonTypes as type}
+          <option value={type}>{type}</option>
+        {/each}
+      </select>
       <button type="button" on:click={generateSummonRemark} class="btn variant-filled"> Summon </button>
     </div>
     <p class="w-96 h-80 bg-white border border-gray-500 p-4">{generatedText}</p>
