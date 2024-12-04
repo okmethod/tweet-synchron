@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { ModalComponent, ModalStore } from "@skeletonlabs/skeleton";
   import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
+  import { ProgressBar } from "@skeletonlabs/skeleton";
   import { fetchText } from "$lib/genlang/generateContent";
   import { summonTypes, type SummonType } from "$lib/types/summons";
   import SubmitModal from "$lib/components/modals/SubmitModal.svelte";
@@ -15,19 +16,29 @@
   let currentSummonType: SummonType = "シンクロ召喚";
 
   let inputText = "";
+  let hashTag = "";
   let generatedText = "";
+  let isLoading = false;
   async function generateSummonRemark(): Promise<void> {
+    isLoading = true;
+    hashTag = inputText;
     generatedText = (await fetchText(prompt(inputText))) ?? "Failed to generate.";
+    isLoading = false;
   }
 
-  const outputText = (text: string, hashTag: string) => `${text}
-  #${hashTag}`;
+  const outputText = (text: string, hashTag: string) => `
+${text}
+#${hashTag}
+`;
   const modalStore = getModalStore();
   function showTweetSubmitModal(modalStore: ModalStore): void {
+    if (!generatedText) {
+      return;
+    }
     const modalComponent: ModalComponent = {
       ref: SubmitModal,
       props: { title: "Tweet this ?" },
-      slot: outputText(generatedText, inputText),
+      slot: outputText(generatedText, hashTag),
     };
     const modal: ModalSettings = {
       type: "component",
@@ -56,9 +67,17 @@
           <option value={type}>{type}</option>
         {/each}
       </select>
-      <button type="button" on:click={generateSummonRemark} class="btn variant-filled"> Summon </button>
+      <button
+        type="button"
+        on:click={generateSummonRemark}
+        class="btn variant-filled"
+        disabled={isLoading || inputText == ""}
+      >
+        Summon
+      </button>
     </div>
-    <p class="w-96 h-80 bg-white border border-gray-500 p-4">{generatedText}</p>
+    <ProgressBar value={isLoading ? undefined : generatedText == "" ? 0 : 100} />
+    <p class="w-96 h-60 bg-white border border-gray-500 p-4">{generatedText}</p>
     <IconButton icon="mdi:bird" label="Tweet ot @tweet_synchron" onClick={() => showTweetSubmitModal(modalStore)} />
   </div>
 </div>
