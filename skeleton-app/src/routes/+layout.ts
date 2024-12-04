@@ -1,21 +1,21 @@
 import type { LoadEvent } from "@sveltejs/kit";
-import type { LegendarySynchroSpell, SynchroSpellsMap } from "$lib/types/spells";
+import type { LegendarySummonRemark, SummonRemarksMap } from "$lib/types/summons";
 import { loadCsv } from "$lib/utils/loadfile";
 
-const legendaryFilePath = "legendary_synchro_spells.csv";
+const legendaryFilePath = "legendary_summon_remarks.csv";
 
 export async function load({ fetch }: LoadEvent): Promise<{
-  synchroSpellsMap: SynchroSpellsMap;
+  summonRemarksMap: SummonRemarksMap;
 }> {
-  const legendarySynchroSpells = (await loadCsv(fetch, legendaryFilePath)) as LegendarySynchroSpell[];
+  const legendarySummonRemarks = (await loadCsv(fetch, legendaryFilePath)) as LegendarySummonRemark[];
 
-  const synchroSpellsMap = legendarySynchroSpells.reduce((acc, spell) => {
-    if (!acc[spell.duelist]) {
-      acc[spell.duelist] = [];
+  const summonRemarksMap = legendarySummonRemarks.reduce((acc, remark) => {
+    if (!acc[remark.duelist]) {
+      acc[remark.duelist] = [];
     }
-    acc[spell.duelist].push({ monster: spell.monster, spellText: spell.spellText });
+    acc[remark.duelist].push({ monster: remark.monster, text: remark.text });
     return acc;
-  }, {} as SynchroSpellsMap);
+  }, {} as SummonRemarksMap);
 
-  return { synchroSpellsMap };
+  return { summonRemarksMap };
 }

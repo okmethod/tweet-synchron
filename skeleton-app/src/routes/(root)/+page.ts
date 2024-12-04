@@ -4,13 +4,13 @@ import { GITHUB_REPO_URL } from "$lib/constants/common";
 
 const contentLinks: TransitionContent[] = [
   {
-    label: "Synchro Spell Generator",
+    label: "Summon Remark Generator",
     symbolSrc: { type: "icon", key: "mdi:star-circle" },
     action: "navigate",
     target: "/generator",
   },
   {
-    label: "Legendary Synchro Spells",
+    label: "Legendary Summon Remarks",
     symbolSrc: { type: "icon", key: "mdi:star-circle" },
     action: "navigate",
     target: "/legends",

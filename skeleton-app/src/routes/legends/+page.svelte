@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { SynchroSpellsMap } from "$lib/types/spells";
+  import type { SummonRemarksMap } from "$lib/types/summons";
 
   export let data: {
-    synchroSpellsMap: SynchroSpellsMap;
+    summonRemarksMap: SummonRemarksMap;
   };
 
   const cDivStyle = "w-full flex flex-col space-y-4";
@@ -12,16 +12,16 @@
 
 <div class="cRouteBodyStyle">
   <div class="cTitlePartStyle">
-    <h1 class="cTitleStyle">Legendary Synchro Spells</h1>
+    <h1 class="cTitleStyle">Legendary Summon Remarks</h1>
   </div>
 
   <div class="cContentPartStyle !space-y-6">
-    {#each Object.entries(data.synchroSpellsMap) as [duelist, spells]}
+    {#each Object.entries(data.summonRemarksMap) as [duelist, remarks]}
       <div class={cDivStyle}>
         <h2 class={cDuelistNameStyle}>{duelist}</h2>
         <ul class={cListStyle}>
-          {#each spells as spell}
-            <li>{spell.spellText}</li>
+          {#each remarks as remark}
+            <li>{remark.text}</li>
           {/each}
         </ul>
       </div>
