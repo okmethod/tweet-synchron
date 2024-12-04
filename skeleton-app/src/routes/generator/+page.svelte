@@ -4,6 +4,7 @@
   import { ProgressBar } from "@skeletonlabs/skeleton";
   import { fetchText } from "$lib/genlang/generateContent";
   import { summonTypes, type SummonType } from "$lib/types/summons";
+  import { redirectTweetByNewTab } from "$lib/utils/tweet";
   import SubmitModal from "$lib/components/modals/SubmitModal.svelte";
   import IconButton from "$lib/components/IconButton.svelte";
 
@@ -11,7 +12,7 @@
   const prompt = (input: string) =>
     `あなたは歴戦のプロデュエリスト(決闘者)です。
     あなたのエースモンスターである《${input}》を${currentSummonType}する際の、最高に盛り上がる口上を考えてください。
-    出力テキストは口上だけになるようにしてください。`;
+    出力テキストは口上だけになるようにしてください。htmlタグは使わないでください。`;
 
   let currentSummonType: SummonType = "シンクロ召喚";
 
@@ -35,17 +36,18 @@ ${text}
     if (!generatedText) {
       return;
     }
+    const tweetText = outputText(generatedText, hashTag);
     const modalComponent: ModalComponent = {
       ref: SubmitModal,
       props: { title: "Tweet this ?" },
-      slot: outputText(generatedText, hashTag),
+      slot: tweetText,
     };
     const modal: ModalSettings = {
       type: "component",
       component: modalComponent,
       response: (isConfirm: boolean) => {
         if (isConfirm) {
-          console.log("OK button clicked.");
+          redirectTweetByNewTab(tweetText);
         }
       },
       backdropClasses: "fixed inset-0 !bg-gray-300/90",
