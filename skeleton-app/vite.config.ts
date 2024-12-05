@@ -66,4 +66,16 @@ export default defineConfig({
       },
     },
   ],
+  server: {
+    fs: {
+      allow: [".."],
+    },
+    proxy: {
+      "/api": {
+        target: process.env.VITE_API_PROXY_TARGET,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 });

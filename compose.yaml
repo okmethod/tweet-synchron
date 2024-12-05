@@ -4,6 +4,9 @@ services:
     ports:
       - 5173:5173
     working_dir: /app
+    environment:
+      - NODE_ENV=development
+      - VITE_API_PROXY_TARGET=http://functions:3000
     env_file:
       - .env
     volumes:
