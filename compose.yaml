@@ -11,5 +11,18 @@ services:
       - skeleton-app-node-modules:/app/node_modules
     command: /bin/sh -c "npm install && npm run dev"
 
+  functions:
+    image: node:18-slim
+    ports:
+      - 3000:3000
+    working_dir: /app
+    env_file:
+      - .env
+    volumes:
+      - ./functions:/app
+      - functions-node-modules:/app/node_modules
+    command: /bin/sh -c "npm install && npm run dev"
+
 volumes:
   skeleton-app-node-modules:
+  functions-node-modules:
