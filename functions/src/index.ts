@@ -3,6 +3,7 @@ import cors from "cors";
 import { onRequest } from "firebase-functions/v2/https";
 import { setGlobalOptions } from "firebase-functions/v2";
 import heartbeat from "./lib/routes/heartbeat.js";
+import genText from "./lib/routes/genText.js";
 
 const app = express();
 
@@ -20,7 +21,10 @@ app.use(
   }),
 );
 
+app.use(express.json());
+
 app.get("/api/heartbeat", heartbeat);
+app.post("/api/gen-text", genText);
 
 setGlobalOptions({ region: "asia-northeast1" });
 
