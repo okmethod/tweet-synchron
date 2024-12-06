@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { onRequest } from "firebase-functions/v2/https";
 import { setGlobalOptions } from "firebase-functions/v2";
+import heartbeat from "./lib/routes/heartbeat.js";
 
 const app = express();
 
@@ -19,9 +20,7 @@ app.use(
   }),
 );
 
-app.get("/api/heartbeat", (_, res) => {
-  res.status(200).send({ message: "alive" });
-});
+app.get("/api/heartbeat", heartbeat);
 
 setGlobalOptions({ region: "asia-northeast1" });
 
