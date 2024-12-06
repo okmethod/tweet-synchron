@@ -8,7 +8,7 @@ services:
       - NODE_ENV=development
       - VITE_API_PROXY_TARGET=http://functions:3000
     env_file:
-      - .env
+      - .env.credentials
     volumes:
       - ./skeleton-app:/app
       - skeleton-app-node-modules:/app/node_modules
@@ -20,7 +20,7 @@ services:
       - 3000:3000
     working_dir: /app
     env_file:
-      - .env
+      - .env.credentials
     volumes:
       - ./functions:/app
       - functions-node-modules:/app/node_modules
