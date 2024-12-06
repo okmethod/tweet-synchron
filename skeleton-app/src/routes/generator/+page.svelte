@@ -2,8 +2,8 @@
   import type { ModalComponent, ModalStore } from "@skeletonlabs/skeleton";
   import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
   import { ProgressBar } from "@skeletonlabs/skeleton";
-  import { fetchText } from "$lib/genlang/generateContent";
   import { summonTypes, type SummonType } from "$lib/types/summons";
+  import postGenText from "$lib/api/postGenText";
   import { redirectTweetByNewTab } from "$lib/utils/tweet";
   import SubmitModal from "$lib/components/modals/SubmitModal.svelte";
   import IconButton from "$lib/components/IconButton.svelte";
@@ -23,7 +23,8 @@
   async function generateSummonRemark(): Promise<void> {
     isLoading = true;
     hashTag = inputText;
-    generatedText = (await fetchText(prompt(inputText))) ?? "Failed to generate.";
+    const { content } = (await postGenText(window.fetch, prompt(inputText))) ?? "Failed to generate.";
+    generatedText = content ?? "Failed to generate.";
     isLoading = false;
   }
 

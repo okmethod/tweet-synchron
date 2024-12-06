@@ -7,7 +7,11 @@ import genText from "./lib/routes/genText.js";
 
 const app = express();
 
-const allowedOrigins = ["https://okmethod-tweet-synchron.web.app", "https://okmethod-tweet-synchron.firebaseapp.com"];
+const allowedOrigins = [
+  "https://okmethod-tweet-synchron.web.app",
+  "https://okmethod-tweet-synchron.firebaseapp.com",
+  "http://localhost:5173",
+];
 
 app.use(
   cors({
