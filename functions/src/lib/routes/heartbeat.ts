@@ -1,9 +1,7 @@
 import type { Request, Response } from "express";
 import type { ResponseHeartbeatJson } from "../types/heartbeat";
 
-
-const heartbeat = async (req: Request, res: Response) => {
-  console.log("req:", req.body);
+const heartbeat = async (_: Request, res: Response) => {
   const now = new Date();
   const response: ResponseHeartbeatJson = {
     alive: now.toISOString(),
