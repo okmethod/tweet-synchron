@@ -9,18 +9,14 @@ const twitterAccessToken = defineString("TWITTER_ACCESS_TOKEN");
 const twitterAccessTokenSecret = defineString("TWITTER_ACCESS_TOKEN_SECRET");
 
 const postTweet = async (req: Request, res: Response) => {
-  const twitterApiKeyValue = process.env.NODE_ENV === "production"
-    ? twitterApiKey.value()
-    : process.env.TWITTER_API_KEY;
-  const twitterApiSecretKeyValue = process.env.NODE_ENV === "production"
-    ? twitterApiSecretKey.value()
-    : process.env.TWITTER_API_SECRET_KEY;
-  const twitterAccessTokenValue = process.env.NODE_ENV === "production"
-    ? twitterAccessToken.value()
-    : process.env.TWITTER_ACCESS_TOKEN;
-  const twitterAccessTokenSecretValue = process.env.NODE_ENV === "production"
-    ? twitterAccessTokenSecret.value()
-    : process.env.TWITTER_ACCESS_TOKEN_SECRET;
+  const twitterApiKeyValue =
+    process.env.NODE_ENV === "production" ? twitterApiKey.value() : process.env.TWITTER_API_KEY;
+  const twitterApiSecretKeyValue =
+    process.env.NODE_ENV === "production" ? twitterApiSecretKey.value() : process.env.TWITTER_API_SECRET_KEY;
+  const twitterAccessTokenValue =
+    process.env.NODE_ENV === "production" ? twitterAccessToken.value() : process.env.TWITTER_ACCESS_TOKEN;
+  const twitterAccessTokenSecretValue =
+    process.env.NODE_ENV === "production" ? twitterAccessTokenSecret.value() : process.env.TWITTER_ACCESS_TOKEN_SECRET;
   if (!twitterApiKeyValue || !twitterApiSecretKeyValue || !twitterAccessTokenValue || !twitterAccessTokenSecretValue) {
     res.status(500).json({ error: "Twitter API credentials not configured" });
     return;
@@ -64,7 +60,7 @@ const postTweet = async (req: Request, res: Response) => {
 
   const response: ResponsePostTweetJson = {
     tweetId: tweetResult.data.id,
-  }
+  };
   res.json(response);
 };
 

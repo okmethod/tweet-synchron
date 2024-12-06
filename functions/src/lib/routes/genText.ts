@@ -7,17 +7,15 @@ import type { RequestGenTextJson, ResponseGenTextJson } from "../types/genText";
 const geminiApiKey = defineString("GEMINI_API_KEY");
 
 const genText = async (req: Request, res: Response) => {
-  const apiKeyValue = process.env.NODE_ENV === "production"
-    ? geminiApiKey.value()
-    : process.env.GEMINI_API_KEY;
+  const apiKeyValue = process.env.NODE_ENV === "production" ? geminiApiKey.value() : process.env.GEMINI_API_KEY;
   if (!apiKeyValue) {
     res.status(500).json({ error: "Gemini API Key not configured" });
     return;
   }
 
   const requestBody: RequestGenTextJson = req.body;
-  const { modelParams, promptText} = requestBody;
-  if ( !modelParams || !promptText) {
+  const { modelParams, promptText } = requestBody;
+  if (!modelParams || !promptText) {
     console.warn("Missing required parameters:", requestBody);
     res.status(400).json({
       error: "Missing required parameters",
@@ -49,7 +47,7 @@ const genText = async (req: Request, res: Response) => {
 
   const response: ResponseGenTextJson = {
     content: generatedContent.response.text(),
-  }
+  };
   res.json(response);
 };
 
