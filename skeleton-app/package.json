@@ -14,8 +14,7 @@
     "format": "prettier --write .",
     "test:integration": "playwright test",
     "test:unit": "vitest",
-    "push": "gh-pages -d build",
-    "deploy": "npm run build && npm run push"
+    "deploy": "make -C .. deploy-app"
   },
   "devDependencies": {
     "@google/generative-ai": "^0.21.0",
@@ -35,7 +34,6 @@
     "eslint": "^9.14.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-svelte": "^2.46.0",
-    "gh-pages": "^6.2.0",
     "globals": "^15.12.0",
     "postcss": "^8.4.40",
     "prettier": "^3.3.3",

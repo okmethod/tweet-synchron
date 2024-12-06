@@ -25,6 +25,8 @@ const content404 = `
 </html>
 `;
 
+console.log("VITE_API_PROXY_TARGET:", process.env.VITE_API_PROXY_TARGET);
+
 export default defineConfig({
   publicDir: "static",
   define: {
@@ -74,7 +76,6 @@ export default defineConfig({
       "/api": {
         target: process.env.VITE_API_PROXY_TARGET,
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },

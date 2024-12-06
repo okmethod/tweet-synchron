@@ -14,7 +14,7 @@
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "dev": "nodemon --exec node --loader ts-node/esm src/index.ts",
-    "deploy": "firebase deploy --only functions",
+    "deploy": "make -C .. deploy-functions",
     "logs": "firebase functions:log"
   },
   "engines": {

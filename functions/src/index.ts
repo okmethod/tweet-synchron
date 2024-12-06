@@ -19,7 +19,7 @@ app.use(
   }),
 );
 
-app.get("/heartbeat", (_, res) => {
+app.get("/api/heartbeat", (_, res) => {
   res.status(200).send({ message: "alive" });
 });
 

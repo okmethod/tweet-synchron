@@ -1,8 +1,15 @@
 # tweet-synchron
 
-~~Firebase Hosting で SPA を公開する。~~ しない。
+Firebase Hosting で SPA を公開する。
 
 ## ローカルでの起動方法
+
+- 各種クレデンシャル情報の設定
+
+  ```sh
+  export GEMINI_API_KEY=(Your API Key)
+  echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> .env.credentials
+  ```
 
 - コンテナ起動
 
@@ -16,16 +23,17 @@
 
 ## インターネットへの公開方法
 
-- 静的アセットデプロイ
+- firebaseデプロイ
 
   ```sh
-  (cd skeleton-app && npm run deploy)
-  ```
+  # 静的アセットのみ
+  make deploy-app
 
-- functionsデプロイ
+  # Functionsのみ
+  make deploy-functions
 
-  ```sh
-  (cd functions && npm run deploy)
+  # まとめて
+  make deploy
   ```
 
 - ブラウザでアクセス
