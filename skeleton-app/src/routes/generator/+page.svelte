@@ -7,12 +7,11 @@
   import { redirectTweetByNewTab } from "$lib/utils/tweet";
   import SubmitModal from "$lib/components/modals/SubmitModal.svelte";
   import IconButton from "$lib/components/IconButton.svelte";
+  import type { PromptTemplate } from "./+page";
 
-  // TODO: プロンプトを調整する
-  const prompt = (input: string) =>
-    `あなたは歴戦のプロデュエリスト(決闘者)です。
-    あなたのエースモンスターである《${input}》を${currentSummonType}する際の、最高に盛り上がる口上を考えてください。
-    出力テキストは口上だけになるようにしてください。htmlタグは使わないでください。`;
+  export let data: {
+    promptTemplate: PromptTemplate;
+  };
 
   let currentSummonType: SummonType = "シンクロ召喚";
 
@@ -23,7 +22,7 @@
   async function generateSummonRemark(): Promise<void> {
     isLoading = true;
     hashTag = inputText;
-    const { content } = (await postGenText(window.fetch, prompt(inputText))) ?? "Failed to generate.";
+    const { content } = await postGenText(window.fetch, data.promptTemplate(inputText, currentSummonType));
     generatedText = content ?? "Failed to generate.";
     isLoading = false;
   }
