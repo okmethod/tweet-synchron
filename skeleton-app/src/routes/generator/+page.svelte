@@ -4,7 +4,8 @@
   import { ProgressBar } from "@skeletonlabs/skeleton";
   import { summonTypes, type SummonType } from "$lib/types/summons";
   import postGenText from "$lib/api/postGenText";
-  import { redirectTweetByNewTab } from "$lib/utils/tweet";
+  import postPostTweet from "$lib/api/postPostTweet";
+  // import { redirectTweetByNewTab } from "$lib/utils/tweet";
   import SubmitModal from "$lib/components/modals/SubmitModal.svelte";
   import IconButton from "$lib/components/IconButton.svelte";
   import type { PromptTemplate } from "./+page";
@@ -45,9 +46,11 @@ ${text}
     const modal: ModalSettings = {
       type: "component",
       component: modalComponent,
-      response: (isConfirm: boolean) => {
+      response: async (isConfirm: boolean) => {
         if (isConfirm) {
-          redirectTweetByNewTab(tweetText);
+          // redirectTweetByNewTab(tweetText);
+          const tweetId = await postPostTweet(window.fetch, tweetText);
+          console.log("tweetId: ", tweetId);
         }
       },
       backdropClasses: "fixed inset-0 !bg-gray-300/90",

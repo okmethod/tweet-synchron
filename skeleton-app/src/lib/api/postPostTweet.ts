@@ -1,0 +1,22 @@
+import { constructRequestInit, fetchApi } from "$lib/utils/request";
+import type { RequestPostTweetJson, ResponsePostTweetJson } from "$lib/types/postTweet";
+
+async function postPostTweet(fetchFunction: typeof window.fetch, tweetText: string): Promise<ResponsePostTweetJson> {
+  const url = "/api/post-tweet";
+  const headers: HeadersInit = { "Content-Type": "application/json" };
+  const requestInit = constructRequestInit(headers);
+  const requestBody: RequestPostTweetJson = { tweetText };
+  const requestConfig = {
+    ...requestInit,
+    method: "POST",
+    body: JSON.stringify(requestBody),
+  };
+  try {
+    const response = await fetchApi(fetchFunction, url, requestConfig);
+    return (await response.json()) as ResponsePostTweetJson;
+  } catch {
+    return { tweetId: null };
+  }
+}
+
+export default postPostTweet;
