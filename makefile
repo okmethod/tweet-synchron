@@ -4,7 +4,6 @@ deploy-app:
 	firebase deploy --only hosting
 
 deploy-functions:
-	cp .env.credentials functions/.env.credentials
 	firebase deploy --only functions
 
 deploy:

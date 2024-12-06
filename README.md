@@ -8,7 +8,7 @@ Firebase Hosting で SPA を公開する。
 
   ```sh
   export GEMINI_API_KEY=(Your API Key)
-  echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> .env.credentials
+  echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> functions/.env
   ```
 
 - コンテナ起動
