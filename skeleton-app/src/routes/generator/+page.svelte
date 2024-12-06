@@ -62,9 +62,9 @@ ${text}
   </div>
 
   <div class="cContentPartStyle">
-    <input type="text" bind:value={inputText} placeholder="Input name here" class="w-full" />
+    <input type="text" id="inputText" bind:value={inputText} placeholder="Input name here" class="w-full" />
     <div class="w-full flex space-x-2">
-      <select class="w-full" bind:value={currentSummonType}>
+      <select id="selectSummonType" bind:value={currentSummonType} class="w-full">
         {#each summonTypes as type}
           <option value={type}>{type}</option>
         {/each}
