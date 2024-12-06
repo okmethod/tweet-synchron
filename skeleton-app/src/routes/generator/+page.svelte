@@ -101,10 +101,10 @@ ${text}
       </button>
     </div>
     <ProgressBar value={isLoading ? undefined : generatedText == "" ? 0 : 100} />
-    <textarea class="w-96 h-60 bg-white border border-gray-500 p-4">{generatedText}</textarea>
+    <textarea class="w-80 sm:w-96 h-60 bg-white border border-gray-500 p-4">{generatedText}</textarea>
     <IconButton
       icon="mdi:bird"
-      label="Tweet ot @tweet_synchron"
+      label="Tweet on @your_account"
       onClick={() => showTweetSubmitModal(modalStore)}
       disabled={generatedText === ""}
     />
