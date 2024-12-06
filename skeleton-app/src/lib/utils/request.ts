@@ -1,8 +1,7 @@
-export function constructRequestInit(): RequestInit {
-  const headers: HeadersInit = {};
+export function constructRequestInit(headers?: HeadersInit): RequestInit {
   const requestInit: RequestInit = {
     credentials: "same-origin",
-    headers: headers,
+    headers: headers ?? {},
   };
   return requestInit;
 }
