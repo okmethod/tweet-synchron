@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { ModalComponent, ModalStore } from "@skeletonlabs/skeleton";
   import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
+  import { getToastStore, type ToastSettings } from "@skeletonlabs/skeleton";
   import { ProgressBar } from "@skeletonlabs/skeleton";
   import { summonTypes, type SummonType } from "$lib/types/summons";
   import postGenText from "$lib/api/postGenText";
@@ -50,12 +51,26 @@ ${text}
         if (isConfirm) {
           // redirectTweetByNewTab(tweetText);
           const tweetId = await postPostTweet(window.fetch, tweetText);
-          console.log("tweetId: ", tweetId);
+          if (tweetId) {
+            showToast(`Tweeted successfully. Tweet ID: ${tweetId}`, "bg-green-100 text-black");
+          } else {
+            showToast("Failed to tweet.", "bg-red-100 text-black");
+          }
         }
       },
       backdropClasses: "fixed inset-0 !bg-gray-300/90",
     };
     modalStore.trigger(modal);
+  }
+
+  const toastStore = getToastStore();
+  function showToast(message: string, cStyle: string): void {
+    const toast: ToastSettings = {
+      message,
+      background: `${cStyle} select-none`,
+      timeout: 3000,
+    };
+    toastStore.trigger(toast);
   }
 </script>
 
@@ -83,6 +98,11 @@ ${text}
     </div>
     <ProgressBar value={isLoading ? undefined : generatedText == "" ? 0 : 100} />
     <p class="w-96 h-60 bg-white border border-gray-500 p-4">{generatedText}</p>
-    <IconButton icon="mdi:bird" label="Tweet ot @tweet_synchron" onClick={() => showTweetSubmitModal(modalStore)} />
+    <IconButton
+      icon="mdi:bird"
+      label="Tweet ot @tweet_synchron"
+      onClick={() => showTweetSubmitModal(modalStore)}
+      disabled={generatedText === ""}
+    />
   </div>
 </div>
