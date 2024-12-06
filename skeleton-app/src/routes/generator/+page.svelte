@@ -1,12 +1,12 @@
 <script lang="ts">
   import type { ModalComponent, ModalStore } from "@skeletonlabs/skeleton";
   import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
-  import { getToastStore, type ToastSettings } from "@skeletonlabs/skeleton";
+  // import { getToastStore, type ToastSettings } from "@skeletonlabs/skeleton";
   import { ProgressBar } from "@skeletonlabs/skeleton";
   import { summonTypes, type SummonType } from "$lib/types/summons";
   import postGenText from "$lib/api/postGenText";
-  import postPostTweet from "$lib/api/postPostTweet";
-  // import { redirectTweetByNewTab } from "$lib/utils/tweet";
+  // import postPostTweet from "$lib/api/postPostTweet";
+  import { redirectTweetByNewTab } from "$lib/utils/tweet";
   import SubmitModal from "$lib/components/modals/SubmitModal.svelte";
   import IconButton from "$lib/components/IconButton.svelte";
   import type { PromptTemplate } from "./+page";
@@ -49,13 +49,15 @@ ${text}
       component: modalComponent,
       response: async (isConfirm: boolean) => {
         if (isConfirm) {
-          // redirectTweetByNewTab(tweetText);
+          redirectTweetByNewTab(tweetText);
+          /*
           const tweetId = await postPostTweet(window.fetch, tweetText);
           if (tweetId) {
             showToast(`Tweeted successfully. Tweet ID: ${tweetId}`, "bg-green-100 text-black");
           } else {
             showToast("Failed to tweet.", "bg-red-100 text-black");
           }
+          */
         }
       },
       backdropClasses: "fixed inset-0 !bg-gray-300/90",
@@ -63,6 +65,7 @@ ${text}
     modalStore.trigger(modal);
   }
 
+  /*
   const toastStore = getToastStore();
   function showToast(message: string, cStyle: string): void {
     const toast: ToastSettings = {
@@ -72,6 +75,7 @@ ${text}
     };
     toastStore.trigger(toast);
   }
+  */
 </script>
 
 <div class="cRouteBodyStyle">
