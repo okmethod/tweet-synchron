@@ -101,7 +101,7 @@ ${text}
       </button>
     </div>
     <ProgressBar value={isLoading ? undefined : generatedText == "" ? 0 : 100} />
-    <p class="w-96 h-60 bg-white border border-gray-500 p-4">{generatedText}</p>
+    <textarea class="w-96 h-60 bg-white border border-gray-500 p-4">{generatedText}</textarea>
     <IconButton
       icon="mdi:bird"
       label="Tweet ot @tweet_synchron"
