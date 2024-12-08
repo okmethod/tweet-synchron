@@ -1,5 +1,6 @@
 import { constructRequestInit, fetchApi } from "$lib/utils/request";
 import type { ModelParams } from "@google/generative-ai";
+import { pathGenText } from "$lib/constants/paths";
 import type { RequestGenTextJson, ResponseGenTextJson } from "$lib/types/genText";
 import { defaultModelParams } from "$lib/constants/modelSettings";
 
@@ -8,7 +9,7 @@ async function postGenText(
   promptText: string,
   modelParams?: ModelParams | undefined,
 ): Promise<ResponseGenTextJson> {
-  const url = "/api/gen-text";
+  const url = pathGenText;
   const headers: HeadersInit = { "Content-Type": "application/json" };
   const requestInit = constructRequestInit(headers);
   const requestBody: RequestGenTextJson = {
