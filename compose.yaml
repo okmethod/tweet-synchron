@@ -1,5 +1,7 @@
 services:
   skeleton-app:
+    depends_on:
+      - functions-api
     image: node:20.12.1-slim
     ports:
       - 5173:5173
