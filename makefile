@@ -3,9 +3,9 @@ deploy-app:
 	cd skeleton-app && VITE_API_PROXY_TARGET=${VITE_API_PROXY_TARGET} npm run build
 	firebase deploy --only hosting
 
-deploy-functions:
-	firebase deploy --only functions
+deploy-functions-api:
+	firebase deploy --only functions:api
 
 deploy:
-	make deploy-functions
+	make deploy-functions-api
 	make deploy-app

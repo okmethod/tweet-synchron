@@ -38,8 +38,8 @@ Firebase Hosting で SPA を公開する。
   # 静的アセットのみ
   make deploy-app
 
-  # Functionsのみ
-  make deploy-functions
+  # APIのみ
+  make deploy-functions-api
 
   # まとめて
   make deploy
