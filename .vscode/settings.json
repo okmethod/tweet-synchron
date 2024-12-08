@@ -1,5 +1,6 @@
 {
   "files.exclude": {
+    "shared": true,
     "skeleton-app": true,
     "functions": true,
   },

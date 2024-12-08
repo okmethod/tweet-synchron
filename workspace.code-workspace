@@ -4,6 +4,9 @@
 			"path": "."
 		},
 		{
+			"path": "shared"
+		},
+		{
 			"path": "skeleton-app"
 		},
 		{
