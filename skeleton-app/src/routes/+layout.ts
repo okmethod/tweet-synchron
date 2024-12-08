@@ -9,7 +9,7 @@ export async function load({ fetch }: LoadEvent): Promise<{
   summonRemarksMap: SummonRemarksMap;
 }> {
   const res = await getHeartbeat(fetch);
-  console.log("Functions Health Check:", res);
+  console.log("Functions API Health Check:", res);
 
   const legendarySummonRemarks = (await loadCsv(fetch, legendaryFilePath)) as LegendarySummonRemark[];
 
