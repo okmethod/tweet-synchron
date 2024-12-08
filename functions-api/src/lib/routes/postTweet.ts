@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import type { TweetV2PostTweetResult } from "twitter-api-v2";
 import type { RequestPostTweetJson, ResponsePostTweetJson } from "../types/postTweet";
-import twitterApiClient from "../services/twitterApiClient.js";
+import TwitterApiSingleton from "../services/TwitterApiSingleton.js";
 
 const postTweet = async (req: Request, res: Response) => {
   const requestBody: RequestPostTweetJson = req.body;
@@ -17,7 +17,8 @@ const postTweet = async (req: Request, res: Response) => {
 
   let tweetResult: TweetV2PostTweetResult;
   try {
-    tweetResult = await twitterApiClient().v2.tweet(tweetText);
+    const twitterApi = TwitterApiSingleton.getInstance();
+    tweetResult = await twitterApi.v2.tweet(tweetText);
   } catch (error) {
     console.error("Failed to post tweet:", error);
     res.status(500).json({ error: "Failed to post tweet" });
