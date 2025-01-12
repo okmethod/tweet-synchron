@@ -1,10 +1,10 @@
 import { TwitterApi, type TwitterApiTokens } from "twitter-api-v2";
-import { defineString } from "firebase-functions/params";
+import { getEnv } from "../utils/getEnv.js";
 
-const apiKey = defineString("TWITTER_API_KEY");
-const apiSecretKey = defineString("TWITTER_API_SECRET_KEY");
-const accessToken = defineString("TWITTER_ACCESS_TOKEN");
-const accessTokenSecret = defineString("TWITTER_ACCESS_TOKEN_SECRET");
+const appKey = getEnv("TWITTER_API_KEY");
+const appSecret = getEnv("TWITTER_API_SECRET_KEY");
+const accessToken = getEnv("TWITTER_ACCESS_TOKEN");
+const accessSecret = getEnv("TWITTER_ACCESS_TOKEN_SECRET");
 
 class TwitterApiSingleton {
   private static instance: TwitterApi | null = null;
@@ -14,30 +14,14 @@ class TwitterApiSingleton {
 
   public static getInstance(): TwitterApi {
     if (!TwitterApiSingleton.instance) {
-      const tokens = TwitterApiSingleton.getCredentials();
-      TwitterApiSingleton.instance = TwitterApiSingleton.initializeInstance(tokens);
+      TwitterApiSingleton.instance = TwitterApiSingleton.initializeInstance({
+        appKey,
+        appSecret,
+        accessToken,
+        accessSecret,
+      });
     }
     return TwitterApiSingleton.instance;
-  }
-
-  private static getCredentials(): TwitterApiTokens {
-    const getEnvValue = (key: string, fallback: string | undefined) =>
-      process.env.NODE_ENV === "production" ? key : fallback;
-
-    const apiKeyValue = getEnvValue(apiKey.value(), process.env.TWITTER_API_KEY);
-    const apiSecretKeyValue = getEnvValue(apiSecretKey.value(), process.env.TWITTER_API_SECRET_KEY);
-    const accessTokenValue = getEnvValue(accessToken.value(), process.env.TWITTER_ACCESS_TOKEN);
-    const accessTokenSecretValue = getEnvValue(accessTokenSecret.value(), process.env.TWITTER_ACCESS_TOKEN_SECRET);
-
-    if (!apiKeyValue || !apiSecretKeyValue || !accessTokenValue || !accessTokenSecretValue) {
-      throw new Error("Failed to get Twitter API credentials");
-    }
-    return {
-      appKey: apiKeyValue,
-      appSecret: apiSecretKeyValue,
-      accessToken: accessTokenValue,
-      accessSecret: accessTokenSecretValue,
-    };
   }
 
   private static initializeInstance(tokens: TwitterApiTokens): TwitterApi {
