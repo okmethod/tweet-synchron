@@ -39,9 +39,9 @@ export const api = onRequest(app);
 
 // for local only
 if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || 3000;
-  const HOST = process.env.HOST || "0.0.0.0";
-  app.listen(PORT as number, HOST as string, () => {
-    console.log(`Server is running on port ${PORT}`);
+  const host = process.env.LOCAL_HOST || "0.0.0.0";
+  const port = process.env.LOCAL_PORT || 3000;
+  app.listen(port as number, host as string, () => {
+    console.log(`Server is running on ${host}:${port}`);
   });
 }
