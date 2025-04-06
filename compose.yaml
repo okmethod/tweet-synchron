@@ -14,6 +14,20 @@ services:
       - skeleton-app-node-modules:/app/node_modules
     command: /bin/sh -c "npm install && npm run dev"
 
+  functions-scheduled:
+    depends_on:
+      - functions-api
+    image: node:20-slim
+    ports:
+      - 4000:4000
+    working_dir: /app
+    env_file:
+      - functions-scheduled/.env
+    volumes:
+      - ./functions-scheduled:/app
+      - functions-scheduled-node-modules:/app/node_modules
+    command: /bin/sh -c "npm install && npm run dev"
+
   functions-api:
     image: node:20-slim
     ports:
@@ -28,4 +42,5 @@ services:
 
 volumes:
   skeleton-app-node-modules:
+  functions-scheduled-node-modules:
   functions-api-node-modules:
