@@ -9,10 +9,11 @@
   import { redirectTweetByNewTab } from "$lib/utils/tweet";
   import SubmitModal from "$lib/components/modals/SubmitModal.svelte";
   import IconButton from "$lib/components/IconButton.svelte";
-  import type { PromptTemplate } from "./+page";
+  import type { PromptEmbedment } from "./+page";
 
   export let data: {
-    promptTemplate: PromptTemplate;
+    promptTemplate: string;
+    promptEmbedment: PromptEmbedment;
   };
 
   let currentSummonType: SummonType = "シンクロ召喚";
@@ -24,7 +25,8 @@
   async function generateSummonRemark(): Promise<void> {
     isLoading = true;
     hashTag = inputText;
-    const { content } = await postGenText(window.fetch, data.promptTemplate(inputText, currentSummonType));
+    const prompt = data.promptTemplate + data.promptEmbedment(inputText, currentSummonType);
+    const { content } = await postGenText(window.fetch, prompt);
     generatedText = content ?? "Failed to generate.";
     isLoading = false;
   }

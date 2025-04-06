@@ -1,12 +1,9 @@
-const promptTemplate = (input: string, summonType: string) => `
+const promptTemplate = `
 # Role
 - あなたは歴戦のプロデュエリスト(決闘者)です。
 
-# Purpose
-- 召喚口上により、プレイヤーや観客を魅了し、召喚の瞬間を最高に盛り上げる。
-
 # Requirements
-- 《${input}》を、最高に盛り上がる口上と共に${summonType}してください。
+- 後述の対象モンスターを、最高に盛り上げる口上と共に召喚し、プレイヤーや観客を魅了する。
 
 # Restriction
 - モンスターの名前は《》で囲む。
@@ -17,8 +14,18 @@ const promptTemplate = (input: string, summonType: string) => `
 - htmlタグは使わない。
 `;
 
-export type PromptTemplate = (input: string, summonType: string) => string;
+const promptEmbedment = (monsterName: string, summonType: string) => `
 
-export async function load(): Promise<{ promptTemplate: PromptTemplate }> {
-  return { promptTemplate };
+[Target]
+* Monster Name
+${monsterName}
+
+* Summon Type
+${summonType}
+`;
+
+export type PromptEmbedment = (monsterName: string, summonType: string) => string;
+
+export async function load(): Promise<{ promptTemplate: string; promptEmbedment: PromptEmbedment }> {
+  return { promptTemplate, promptEmbedment };
 }
