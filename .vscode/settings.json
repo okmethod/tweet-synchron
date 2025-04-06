@@ -1,6 +1,7 @@
 {
   "files.exclude": {
     "skeleton-app": true,
+    "functions-scheduled": true,
     "functions-api": true,
   },
   "[makefile]": {

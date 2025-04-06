@@ -7,6 +7,9 @@
 			"path": "skeleton-app"
 		},
 		{
+			"path": "functions-scheduled",
+		},
+		{
 			"path": "functions-api"
 		}
 	],
