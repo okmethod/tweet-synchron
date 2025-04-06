@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import type { GenerateContentResult } from "@google/generative-ai";
-import type { RequestGenTextJson, ResponseGenTextJson } from "../types/genText";
+import type { RequestGenTextJson, ResponseGenTextJson } from "../types/gemini";
 import GoogleGenerativeAISingleton from "../services/GoogleGenerativeAISingleton.js";
 
 const genText = async (req: Request, res: Response) => {

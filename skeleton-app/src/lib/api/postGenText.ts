@@ -1,7 +1,7 @@
 import { constructRequestInit, fetchApi } from "$lib/utils/request";
 import type { ModelParams } from "@google/generative-ai";
 import { pathGenText } from "$lib/constants/paths";
-import type { RequestGenTextJson, ResponseGenTextJson } from "$lib/types/genText";
+import type { RequestGenTextJson, ResponseGenTextJson } from "$lib/types/gemini";
 import { defaultModelParams } from "$lib/constants/modelSettings";
 
 async function postGenText(
