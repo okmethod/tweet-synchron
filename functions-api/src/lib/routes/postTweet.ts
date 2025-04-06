@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import type { TweetV2PostTweetResult } from "twitter-api-v2";
-import type { RequestPostTweetJson, ResponsePostTweetJson } from "../types/postTweet";
+import type { RequestPostTweetJson, ResponsePostTweetJson } from "../types/twitter";
 import TwitterApiSingleton from "../services/TwitterApiSingleton.js";
 
 const postTweet = async (req: Request, res: Response) => {

@@ -1,6 +1,6 @@
 import { constructRequestInit, fetchApi } from "$lib/utils/request";
 import { pathPostTweet } from "$lib/constants/paths";
-import type { RequestPostTweetJson, ResponsePostTweetJson } from "$lib/types/postTweet";
+import type { RequestPostTweetJson, ResponsePostTweetJson } from "$lib/types/twitter";
 
 async function postPostTweet(fetchFunction: typeof window.fetch, tweetText: string): Promise<ResponsePostTweetJson> {
   const url = pathPostTweet;
