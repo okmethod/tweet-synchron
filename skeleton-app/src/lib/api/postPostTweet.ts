@@ -2,11 +2,20 @@ import { constructRequestInit, fetchApi } from "$lib/utils/request";
 import { pathPostTweet } from "$lib/constants/paths";
 import type { RequestPostTweetJson, ResponsePostTweetJson } from "$lib/types/twitter";
 
-async function postPostTweet(fetchFunction: typeof window.fetch, tweetText: string): Promise<ResponsePostTweetJson> {
+async function postPostTweet(
+  fetchFunction: typeof window.fetch,
+  accountPassphrase: string,
+  tweetText: string,
+  inReplyToTweetId: string | null = null,
+): Promise<ResponsePostTweetJson> {
   const url = pathPostTweet;
   const headers: HeadersInit = { "Content-Type": "application/json" };
   const requestInit = constructRequestInit(headers);
-  const requestBody: RequestPostTweetJson = { tweetText };
+  const requestBody: RequestPostTweetJson = {
+    accountPassphrase,
+    tweetText,
+    inReplyToTweetId: inReplyToTweetId ?? undefined,
+  };
   const requestConfig = {
     ...requestInit,
     method: "POST",
