@@ -18,7 +18,7 @@ class TwitterApiSingletonMap {
 
   private static getTokens(accountPassphrase: string): TwitterApiTokens {
     const tokenMap: Record<string, TwitterApiTokens> = {
-      synchron: {
+      tweet_synchron: {
         appKey: getEnv("TWITTER_API_KEY"),
         appSecret: getEnv("TWITTER_API_SECRET_KEY"),
         accessToken: getEnv("TWITTER_ACCESS_TOKEN"),
