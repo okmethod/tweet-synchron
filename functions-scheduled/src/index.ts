@@ -1,5 +1,6 @@
 import { onSchedule } from "firebase-functions/v2/scheduler";
 import { setGlobalOptions } from "firebase-functions/v2";
+import tweetSynchro from "./lib/scripts/tweetSynchro.js";
 
 setGlobalOptions({ region: "asia-northeast1" });
 
@@ -12,11 +13,12 @@ export const scheduledFunction = onSchedule("every 12 hours from 11:00 to 23:00"
 });
 
 async function mainScript(): Promise<void> {
+  await tweetSynchro("tweet_synchron");
   return;
 }
 
 // for local only
 if (process.env.NODE_ENV !== "production") {
   console.log("Running in development mode");
-  // await mainScript();  ローカルでテストする時はコメントアウトを外す
+  // await mainScript();  // ローカルでテストする時はコメントアウトを外す
 }

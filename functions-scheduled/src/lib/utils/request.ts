@@ -1,12 +1,12 @@
 import { getEnv } from "../utils/getEnv.js";
 
 export function constructRequestInit(headers?: HeadersInit): RequestInit {
-  const apiKey = getEnv("API_KEY");
+  // const apiKey = getEnv("API_KEY");
   const requestInit: RequestInit = {
     credentials: "same-origin",
     headers: {
       ...headers,
-      "x-api-key": apiKey,
+      // "x-api-key": apiKey,
     },
   };
   return requestInit;
