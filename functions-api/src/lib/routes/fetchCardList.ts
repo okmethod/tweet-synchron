@@ -28,7 +28,7 @@ const fetchCardList = async (req: Request, res: Response) => {
     const htmlBuffer = await response.buffer();
 
     const extractor = new StyleTableExtractor();
-    extractor.parse(htmlBuffer);
+    extractor.parse(htmlBuffer, "euc-jp");
 
     const cardNames = extractor.tableData
       .map((row) => removeAsteriskNumber(row[0]))

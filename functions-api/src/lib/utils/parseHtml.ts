@@ -1,20 +1,20 @@
 import { JSDOM } from "jsdom";
 import iconv from "iconv-lite";
 
+function decodeBuffer(buffer: Buffer, encoding: string): string {
+  return iconv.decode(buffer, encoding);
+}
+
 export class StyleTableExtractor {
   public tableData: string[][] = [];
 
-  public parse(html: Buffer): void {
-    // HTMLデータをEUC-JPからUTF-8に変換
-    const decodedHtml = iconv.decode(html, "euc-jp");
-
-    // JSDOMを使用してHTMLを解析
+  public parse(htmlBuffer: Buffer, encoding: string): void {
+    const decodedHtml = decodeBuffer(htmlBuffer, encoding);
     const dom = new JSDOM(decodedHtml);
     const document = dom.window.document;
 
     // <table class="style_table"> を取得
     const tables = document.querySelectorAll("table.style_table");
-
     tables.forEach((table) => {
       const rows = table.querySelectorAll("tr");
       rows.forEach((row) => {
