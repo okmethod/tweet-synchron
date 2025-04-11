@@ -3,6 +3,7 @@
     "skeleton-app": true,
     "functions-scheduled": true,
     "functions-api": true,
+    "python-tools": true,
   },
   "[makefile]": {
     "editor.insertSpaces": false,

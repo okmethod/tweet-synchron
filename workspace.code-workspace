@@ -11,6 +11,9 @@
 		},
 		{
 			"path": "functions-api"
+		},
+		{
+			"path": "python-tools"
 		}
 	],
 	"settings": {}
