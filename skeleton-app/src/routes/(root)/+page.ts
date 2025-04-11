@@ -16,6 +16,12 @@ const contentLinks: TransitionContent[] = [
     target: "/legends",
   },
   {
+    label: "Card Info Extractor",
+    symbolSrc: { type: "icon", key: "mdi:star-circle" },
+    action: "navigate",
+    target: "/extractor",
+  },
+  {
     label: "Github Repository",
     symbolSrc: { type: "icon", key: "mdi:source-repository" },
     action: "redirectNewTab",
