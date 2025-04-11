@@ -30,3 +30,49 @@ export class StyleTableExtractor {
     });
   }
 }
+
+export class TagTextExtractor {
+  public extractedTexts: string[] = [];
+
+  public parse(htmlBuffer: Buffer, encoding: string, tagName: string): void {
+    const decodedHtml = decodeBuffer(htmlBuffer, encoding);
+    const dom = new JSDOM(decodedHtml);
+    const document = dom.window.document;
+
+    // 指定されたタグを取得
+    const tags = document.querySelectorAll(tagName);
+    tags.forEach((tag) => {
+      const text = tag.textContent?.trim();
+      if (text) {
+        this.extractedTexts.push(text);
+      }
+    });
+  }
+}
+
+export class WikiTextExtractor {
+  private textParts: string[] = [];
+
+  public parse(html: string): void {
+    const dom = new JSDOM(html);
+    const document = dom.window.document;
+
+    // 再帰的にテキストノードを収集
+    this.extractText(document.body);
+  }
+
+  private extractText(node: Node): void {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent?.trim();
+      if (text) {
+        this.textParts.push(text);
+      }
+    } else if (node.hasChildNodes()) {
+      node.childNodes.forEach((child) => this.extractText(child));
+    }
+  }
+
+  public getText(): string {
+    return this.textParts.join(" ");
+  }
+}
