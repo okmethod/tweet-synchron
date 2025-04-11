@@ -1,7 +1,7 @@
 from html.parser import HTMLParser
 
 
-class StyleTableParser(HTMLParser):
+class StyleTableExtractor(HTMLParser):
     def __init__(self):
         super().__init__()
         self.in_style_table = False
@@ -32,7 +32,7 @@ class StyleTableParser(HTMLParser):
             self.current_row[-1] += data.strip()
 
 
-class H2TagsParser(HTMLParser):
+class H2TagsExtractor(HTMLParser):
     def __init__(self):
         super().__init__()
         self.in_h2 = False
@@ -51,7 +51,7 @@ class H2TagsParser(HTMLParser):
             self.card_names.append(data.strip())
 
 
-class PreTagsParser(HTMLParser):
+class PreTagsExtractor(HTMLParser):
     def __init__(self):
         super().__init__()
         self.in_pre = False
@@ -73,7 +73,7 @@ class PreTagsParser(HTMLParser):
             self.current_text += data
 
 
-class PlainTextParser(HTMLParser):
+class PlainTextExtractor(HTMLParser):
     def __init__(self):
         super().__init__()
         self.text_parts = []

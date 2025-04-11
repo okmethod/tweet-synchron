@@ -1,7 +1,7 @@
 import requests
 
 from src.utils.url_parser import encode_euc_jp 
-from src.utils.html_parser import StyleTableParser
+from src.utils.html_parser import StyleTableExtractor
 from src.utils.regex_processer import remove_asterisk_number, is_enclosed_in_brackets
 
 
@@ -12,10 +12,10 @@ def parse_ygo_wiki_table(page_name: str) -> list[str]:
     response = requests.get(url)
     response.raise_for_status()
 
-    parser = StyleTableParser()
-    parser.feed(response.text)
+    extractor = StyleTableExtractor()
+    extractor.feed(response.text)
 
-    head_items = [row[0] for row in parser.table_data if any(cell.strip() for cell in row)]
+    head_items = [row[0] for row in extractor.table_data if any(cell.strip() for cell in row)]
     return head_items
 
 
