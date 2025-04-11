@@ -2,10 +2,11 @@ import express from "express";
 import cors from "cors";
 import { onRequest } from "firebase-functions/v2/https";
 import { setGlobalOptions } from "firebase-functions/v2";
-import { pathHeartbeat, pathGenText, pathPostTweet } from "./lib/consts/paths.js";
+import { pathHeartbeat, pathGenText, pathPostTweet, pathParseFetchCardList } from "./lib/consts/paths.js";
 import heartbeat from "./lib/routes/heartbeat.js";
 import genText from "./lib/routes/genText.js";
 import postTweet from "./lib/routes/postTweet.js";
+import fetchCardList from "./lib/routes/fetchCardList.js";
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use(express.json());
 app.get(pathHeartbeat, heartbeat);
 app.post(pathGenText, genText);
 app.post(pathPostTweet, postTweet);
+app.get(pathParseFetchCardList, fetchCardList);
 
 setGlobalOptions({ region: "asia-northeast1" });
 
