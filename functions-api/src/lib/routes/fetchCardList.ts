@@ -25,7 +25,8 @@ const fetchCardList = async (req: Request, res: Response) => {
     if (!response.ok) {
       throw new Error(`Failed to fetch data from ${url}`);
     }
-    const htmlBuffer = await response.buffer();
+    const arrayBuffer = await response.arrayBuffer();
+    const htmlBuffer = Buffer.from(arrayBuffer);
 
     const extractor = new StyleTableExtractor();
     extractor.parse(htmlBuffer, "euc-jp");
