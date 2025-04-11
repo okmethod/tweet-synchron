@@ -20,6 +20,8 @@
       isLoading = false;
     }
   }
+
+  let selectedCard: string | null = null;
 </script>
 
 <div class="cRouteBodyStyle">
@@ -49,6 +51,17 @@
       </button>
     </div>
     <ProgressBar value={isLoading ? undefined : cardList.length == 0 ? 0 : 100} />
-    <textarea class="w-80 sm:w-96 h-60 bg-white border border-gray-500 p-4">{cardList}</textarea>
+    <ul class="h-80 w-96 bg-white border border-gray-300 rounded-md divide-y divide-gray-200 mt-4 overflow-y-auto">
+      {#each cardList as card}
+        <li class="flex items-center p-2">
+          <input type="radio" id={card} name="cardList" value={card} bind:group={selectedCard} class="mr-2" />
+          <label for={card} class="text-gray-700">{card}</label>
+        </li>
+      {/each}
+    </ul>
+
+    {#if selectedCard}
+      <p class="mt-4 text-gray-700">Selected Card: {selectedCard}</p>
+    {/if}
   </div>
 </div>
