@@ -1,7 +1,8 @@
 <script lang="ts">
   import { ProgressBar } from "@skeletonlabs/skeleton";
-  import { monsterTypes } from "$lib/types/cards";
+  import { monsterTypes, type CardInfo } from "$lib/types/cards";
   import getFetchCardList from "$lib/api/getFetchCardList";
+  import getFetchCardInfo from "$lib/api/getFetchCardInfo";
 
   let currentMonsterType = "";
 
@@ -22,6 +23,15 @@
   }
 
   let selectedCard: string | null = null;
+  let selectedCardInfo: CardInfo | null = null;
+  async function fetchCardInfo(cardName: string) {
+    try {
+      const response = await getFetchCardInfo(window.fetch, cardName);
+      selectedCardInfo = response || null;
+    } catch (error) {
+      console.error("Failed to fetch card info:", error);
+    }
+  }
 </script>
 
 <div class="cRouteBodyStyle">
@@ -58,16 +68,31 @@
     </p>
 
     <ul class="h-80 w-96 bg-white border border-gray-300 rounded-md divide-y divide-gray-200 mt-4 overflow-y-auto">
-      {#each cardList as card}
+      {#each cardList as cardName}
         <li class="flex items-center p-2">
-          <input type="radio" id={card} name="cardList" value={card} bind:group={selectedCard} class="mr-2" />
-          <label for={card} class="text-gray-700">{card}</label>
+          <input
+            type="radio"
+            id={cardName}
+            name="cardList"
+            value={cardName}
+            bind:group={selectedCard}
+            on:change={() => fetchCardInfo(cardName)}
+            class="mr-2"
+          />
+          <label for={cardName} class="text-gray-700">{cardName}</label>
         </li>
       {/each}
     </ul>
 
-    {#if selectedCard}
-      <p class="mt-4 text-gray-700">Selected Card: {selectedCard}</p>
-    {/if}
+    <div class="mt-4">
+      {#if selectedCardInfo}
+        <div class="flex flex-col items-center space-y-2">
+          <p class="text-gray-700">{selectedCardInfo.name}</p>
+          <pre class="bg-gray-100 text-xs p-4 rounded-md">{selectedCardInfo.cardTexts[0]}</pre>
+        </div>
+      {:else if selectedCard}
+        <p class="text-gray-700">Fetching card info...</p>
+      {/if}
+    </div>
   </div>
 </div>

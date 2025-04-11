@@ -6,3 +6,9 @@ export const monsterTypes = [
   "ペンデュラムモンスター",
   "リンクモンスター",
 ] as const;
+
+export interface CardInfo {
+  name: string;
+  cardTexts: string[];
+  wikiText: string;
+}
