@@ -50,7 +50,13 @@
         {isLoading ? "Loading..." : "Fetch Cards"}
       </button>
     </div>
+
     <ProgressBar value={isLoading ? undefined : cardList.length == 0 ? 0 : 100} />
+
+    <p class="mt-2 text-gray-700">
+      {cardList.length > 0 ? `Found ${cardList.length} cards` : isLoading ? "Loading cards..." : "No cards found"}
+    </p>
+
     <ul class="h-80 w-96 bg-white border border-gray-300 rounded-md divide-y divide-gray-200 mt-4 overflow-y-auto">
       {#each cardList as card}
         <li class="flex items-center p-2">
