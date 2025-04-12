@@ -1,8 +1,8 @@
 <script lang="ts">
   import { ProgressBar } from "@skeletonlabs/skeleton";
   import { monsterTypes, type CardInfo } from "$lib/types/cards";
-  import getYgoWikiFetchCardList from "$lib/api/wiki/getFetchCardList";
-  import getYgoWikiFetchCardInfo from "$lib/api/wiki/getFetchCardInfo";
+  import getYgoWikiFetchCardList from "$lib/api/ygowiki/getFetchCardList";
+  import getYgoWikiFetchCardInfo from "$lib/api/ygowiki/getFetchCardInfo";
   import getYgoProDeckCardInfo from "$lib/api/ygoprodeck/getFetchCardInfo";
 
   let currentMonsterType = "";

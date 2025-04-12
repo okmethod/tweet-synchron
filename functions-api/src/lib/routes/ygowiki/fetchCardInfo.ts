@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import fetch from "node-fetch";
-import type { ResponseCardInfoJson } from "../../types/wiki";
+import type { ResponseCardInfoJson } from "../../types/ygowiki";
 import { TagTextExtractor, StorySectionExtractor, WikiTextExtractor } from "../../utils/parseHtml.js";
 import { encodeEucJp } from "../../utils/parseUrl.js";
 import { parseCardNames } from "../../utils/processRegex.js";
@@ -8,8 +8,8 @@ import { parseCardNames } from "../../utils/processRegex.js";
 const ygoWikiUrl = "https://yugioh-wiki.net/index.php";
 
 const fetchCardInfo = async (req: Request, res: Response) => {
-  const { pageName } = req.params;
-  if (!pageName) {
+  const { jaName } = req.params;
+  if (!jaName) {
     console.warn("Missing required parameters:", req.params);
     res.status(400).json({
       error: "Missing required parameters",
@@ -19,7 +19,7 @@ const fetchCardInfo = async (req: Request, res: Response) => {
   }
 
   try {
-    const encodedPageName = encodeEucJp(pageName);
+    const encodedPageName = encodeEucJp(jaName);
     const url = `${ygoWikiUrl}?${encodedPageName}`;
     const response = await fetch(url);
     if (!response.ok) {

@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import fetch from "node-fetch";
-import type { ResponseCardListJson } from "../../types/wiki";
+import type { ResponseCardListJson } from "../../types/ygowiki";
 import { StyleTableExtractor } from "../../utils/parseHtml.js";
 import { encodeEucJp } from "../../utils/parseUrl.js";
 import { removeAsteriskNumber, isEnclosedInAngleBrackets } from "../../utils/processRegex.js";

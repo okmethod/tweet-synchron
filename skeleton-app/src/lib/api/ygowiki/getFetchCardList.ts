@@ -1,9 +1,9 @@
 import { constructRequestInit, fetchApi } from "$lib/utils/request";
-import { pathWikiFetchCardList } from "$lib/constants/paths";
-import type { ResponseCardListJson } from "$lib/types/wiki";
+import { pathYgoWikiFetchCardList } from "$lib/constants/paths";
+import type { ResponseCardListJson } from "$lib/types/ygowiki";
 
 async function getFetchCardList(fetchFunction: typeof window.fetch, pageName: string): Promise<ResponseCardListJson> {
-  const url = pathWikiFetchCardList.replace(":pageName", pageName);
+  const url = pathYgoWikiFetchCardList.replace(":pageName", pageName);
   const requestInit = constructRequestInit();
   const requestConfig = {
     ...requestInit,
