@@ -1,6 +1,6 @@
 <script lang="ts">
   import { ProgressBar } from "@skeletonlabs/skeleton";
-  import { monsterTypes, type CardInfo } from "$lib/types/cards";
+  import { monsterTypes, uniteCardInfo, type UnifiedCardInfo } from "$lib/types/cards";
   import getYgoWikiFetchCardList from "$lib/api/ygowiki/getFetchCardList";
   import getYgoWikiFetchCardInfo from "$lib/api/ygowiki/getFetchCardInfo";
   import getYgoProDeckCardInfo from "$lib/api/ygoprodeck/getFetchCardInfo";
@@ -24,12 +24,12 @@
   }
 
   let selectedCard: string | null = null;
-  let selectedCardInfo: CardInfo | null = null;
+  let selectedCardInfo: UnifiedCardInfo | null = null;
   async function fetchCardInfo(cardName: string) {
     try {
       const ygoWikiResponse = await getYgoWikiFetchCardInfo(window.fetch, cardName);
-      selectedCardInfo = ygoWikiResponse || null;
-      const ygoProDeckResponse = await getYgoProDeckCardInfo(window.fetch, selectedCardInfo.names.enName);
+      const ygoProDeckResponse = await getYgoProDeckCardInfo(window.fetch, ygoWikiResponse.names.enName);
+      selectedCardInfo = uniteCardInfo(ygoWikiResponse, ygoProDeckResponse);
       console.log("YgoProDeck Response:", ygoProDeckResponse.data);
     } catch (error) {
       console.error("Failed to fetch card info:", error);
@@ -43,7 +43,7 @@
   </div>
 
   <div class="cContentPartStyle">
-    <div class="w-full flex space-x-2">
+    <div class="w-full max-w-96 flex space-x-2">
       <select
         id="selectMonsterType"
         bind:value={currentMonsterType}
@@ -57,7 +57,7 @@
       <button
         type="button"
         on:click={fetchCardList}
-        class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 disabled:bg-gray-300"
+        class="w-full max-w-96 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 disabled:bg-gray-300"
         disabled={isLoading || currentMonsterType === ""}
       >
         {isLoading ? "Loading..." : "Fetch Cards"}
@@ -91,6 +91,11 @@
       {#if selectedCardInfo}
         <div class="flex flex-col items-center space-y-2">
           <p class="text-gray-700">《{selectedCardInfo.names.fullName}》</p>
+          <img
+            src={selectedCardInfo.cardImages ? selectedCardInfo.cardImages[0].image_url : ""}
+            alt={selectedCardInfo.names.fullName}
+            class="w-64 h-auto rounded-md border border-gray-300"
+          />
           <pre class="bg-gray-100 text-xs p-4 rounded-md">{selectedCardInfo.cardTexts[0]}</pre>
           <pre class="bg-gray-100 text-xs p-4 rounded-md">{selectedCardInfo.storyDescription}</pre>
         </div>

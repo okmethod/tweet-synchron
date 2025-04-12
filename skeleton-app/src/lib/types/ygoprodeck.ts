@@ -6,7 +6,7 @@ interface CardSet {
   set_price: string;
 }
 
-interface CardImage {
+export interface CardImage {
   id: number;
   image_url: string;
   image_url_small: string;
@@ -27,14 +27,19 @@ interface CardInfo {
   type: string;
   frameType: string;
   desc: string;
-  atk: number;
-  def: number;
-  level: number;
-  race: string;
-  attribute: string;
+  ygoprodeck_url: string;
+
+  card_images?: CardImage[];
+
+  race?: string;
+  archetype?: string;
+  atk?: number;
+  def?: number;
+  level?: number;
+  attribute?: string;
+
   card_sets?: CardSet[];
-  card_images: CardImage[];
-  card_prices: CardPrice[];
+  card_prices?: CardPrice[];
 }
 
 export interface ResponseCardInfoJson {
