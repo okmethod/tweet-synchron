@@ -8,16 +8,16 @@
   let currentMonsterType = "";
 
   let isLoading = false;
-  let cardList: string[] = [];
+  let jaNames: string[] = [];
   async function fetchCardList() {
     if (!currentMonsterType) return;
     isLoading = true;
     try {
       const response = await getYgoWikiFetchCardList(window.fetch, currentMonsterType);
-      cardList = response.cardList || [];
+      jaNames = response.jaNames || [];
     } catch (error) {
       console.error("Failed to fetch card list:", error);
-      cardList = [];
+      jaNames = [];
     } finally {
       isLoading = false;
     }
@@ -64,25 +64,25 @@
       </button>
     </div>
 
-    <ProgressBar value={isLoading ? undefined : cardList.length == 0 ? 0 : 100} />
+    <ProgressBar value={isLoading ? undefined : jaNames.length == 0 ? 0 : 100} />
 
     <p class="mt-2 text-gray-700">
-      {cardList.length > 0 ? `Found ${cardList.length} cards` : isLoading ? "Loading cards..." : "No cards found"}
+      {jaNames.length > 0 ? `Found ${jaNames.length} cards` : isLoading ? "Loading cards..." : "No cards found"}
     </p>
 
     <ul class="h-80 w-96 bg-white border border-gray-300 rounded-md divide-y divide-gray-200 mt-4 overflow-y-auto">
-      {#each cardList as cardName}
+      {#each jaNames as jaName}
         <li class="flex items-center p-2">
           <input
             type="radio"
-            id={cardName}
+            id={jaName}
             name="cardList"
-            value={cardName}
+            value={jaName}
             bind:group={selectedCard}
-            on:change={() => fetchCardInfo(cardName)}
+            on:change={() => fetchCardInfo(jaName)}
             class="mr-2"
           />
-          <label for={cardName} class="text-gray-700">{cardName}</label>
+          <label for={jaName} class="text-gray-700">{jaName}</label>
         </li>
       {/each}
     </ul>

@@ -4,10 +4,3 @@ export interface CardNames {
   jaName: string;
   enName: string;
 }
-
-export interface CardInfo {
-  names: CardNames;
-  cardTexts: string[];
-  storyDescription: string;
-  wikiText: string;
-}

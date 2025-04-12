@@ -1,7 +1,12 @@
-import type { CardInfo } from "./cards";
+import type { CardNames } from "./cards";
 
 export interface ResponseCardListJson {
-  cardList: string[];
+  jaNames: string[];
 }
 
-export type ResponseCardInfoJson = CardInfo;
+export interface ResponseCardInfoJson {
+  names: CardNames;
+  cardTexts: string[];
+  storyDescription: string;
+  wikiText: string;
+}

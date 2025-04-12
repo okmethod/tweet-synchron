@@ -31,13 +31,11 @@ const fetchCardList = async (req: Request, res: Response) => {
     const extractor = new StyleTableExtractor();
     extractor.parse(htmlBuffer, "euc-jp");
 
-    const cardNames = extractor.tableData
+    const jaNames = extractor.tableData
       .map((row) => removeAsteriskNumber(row[0]))
       .filter((name) => isEnclosedInAngleBrackets(name));
 
-    const responseData: ResponseCardListJson = {
-      cardList: cardNames,
-    };
+    const responseData: ResponseCardListJson = { jaNames };
     res.json(responseData);
   } catch (error) {
     console.error("Error fetching card list:", error);
