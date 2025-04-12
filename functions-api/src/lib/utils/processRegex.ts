@@ -11,3 +11,13 @@ export function isEnclosedInBrackets(entry: string): boolean {
    */
   return /^《.*》$/.test(entry);
 }
+
+export function fetchEnclosingBrackets(entry: string, includeBrackets?: boolean | undefined): string {
+  /**
+   * エントリの《》で囲まれた部分のみを取得する
+   */
+  const match = entry.match(/《(.*?)》/);
+  if (!match) return "";
+
+  return includeBrackets ? match[0] : match[1];
+}
