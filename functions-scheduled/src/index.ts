@@ -20,5 +20,5 @@ async function mainScript(): Promise<void> {
 // for local only
 if (process.env.NODE_ENV !== "production") {
   console.log("Running in development mode");
-  await mainScript(); // ローカルでテストする時はコメントアウトを外す
+  // await mainScript(); // ローカルでテストする時はコメントアウトを外す
 }
