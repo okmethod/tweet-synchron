@@ -1,3 +1,5 @@
+import type { UnifiedCardInfo } from "$lib/types/cards";
+
 const promptTemplate = `
 # Role
 - あなたは歴戦のプロデュエリスト(決闘者)です。
@@ -14,7 +16,8 @@ const promptTemplate = `
 - htmlタグは使わない。
 `;
 
-const promptEmbedment = (monsterName: string, summonType: string) => `
+const promptEmbedment = (monsterName: string, summonType: string, cardInfo: UnifiedCardInfo | null) => {
+  let result = `
 
 [Target]
 * Monster Name
@@ -24,7 +27,20 @@ ${monsterName}
 ${summonType}
 `;
 
-export type PromptEmbedment = (monsterName: string, summonType: string) => string;
+  if (cardInfo)
+    result += `
+
+* Card Text
+${cardInfo.cardTexts[0]}
+
+* Story Description
+${cardInfo.storyDescription}
+`;
+
+  return result;
+};
+
+export type PromptEmbedment = (monsterName: string, summonType: string, cardInfo: UnifiedCardInfo | null) => string;
 
 export async function load(): Promise<{ promptTemplate: string; promptEmbedment: PromptEmbedment }> {
   return { promptTemplate, promptEmbedment };

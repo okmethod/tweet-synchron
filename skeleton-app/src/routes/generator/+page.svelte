@@ -5,6 +5,7 @@
   import { ProgressBar } from "@skeletonlabs/skeleton";
   import { page } from "$app/state";
   import { summonTypes, type SummonType } from "$lib/types/summons";
+  import getFetchCardInfo from "$lib/api/fetchCardInfo";
   import postGenText from "$lib/api/postGenText";
   // import postPostTweet from "$lib/api/postPostTweet";
   import { redirectTweetByNewTab } from "$lib/utils/tweet";
@@ -30,7 +31,9 @@
   async function generateSummonRemark(): Promise<void> {
     isLoading = true;
     hashTag = inputText;
-    const prompt = data.promptTemplate + data.promptEmbedment(inputText, currentSummonType);
+    const selectedCardInfo = await getFetchCardInfo(window.fetch, inputText);
+    const prompt = data.promptTemplate + data.promptEmbedment(inputText, currentSummonType, selectedCardInfo);
+    console.log("Prompt:", prompt);
     const { content } = await postGenText(window.fetch, prompt);
     generatedText = content ?? "Failed to generate.";
     isLoading = false;
