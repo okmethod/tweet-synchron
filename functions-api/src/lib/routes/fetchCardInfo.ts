@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import fetch from "node-fetch";
 import type { ResponseCardInfoJson } from "../types/parser";
-import { TagTextExtractor } from "../utils/parseHtml.js";
+import { TagTextExtractor, WikiTextExtractor } from "../utils/parseHtml.js";
 import { encodeEucJp } from "../utils/parseUrl.js";
 import { parseCardNames } from "../utils/processRegex.js";
 
@@ -37,16 +37,20 @@ const fetchCardInfo = async (req: Request, res: Response) => {
     cardTextsExtractor.parse(htmlBuffer, "euc-jp", "pre");
     const cardTexts = cardTextsExtractor.extractedTexts;
 
+    const wikiTextExtractor = new WikiTextExtractor();
+    wikiTextExtractor.parse(htmlBuffer, "euc-jp");
+    const wikiText = wikiTextExtractor.getText();
+
     const responseData: ResponseCardInfoJson = {
       names: cardNames,
       cardTexts: cardTexts,
-      wikiText: "",
+      wikiText: wikiText,
     };
     res.json(responseData);
   } catch (error) {
-    console.error("Error fetching card list:", error);
+    console.error("Error fetching card info:", error);
     res.status(500).json({
-      error: "Failed to fetch card list",
+      error: "Failed to fetch card info",
       details: error instanceof Error ? error.message : "Unknown error",
     });
   }

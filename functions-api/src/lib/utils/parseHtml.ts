@@ -53,22 +53,23 @@ export class TagTextExtractor {
 export class WikiTextExtractor {
   private textParts: string[] = [];
 
-  public parse(html: string): void {
-    const dom = new JSDOM(html);
+  public parse(htmlBuffer: Buffer, encoding: string): void {
+    const decodedHtml = decodeBuffer(htmlBuffer, encoding);
+    const dom = new JSDOM(decodedHtml);
     const document = dom.window.document;
 
     // 再帰的にテキストノードを収集
-    this.extractText(document.body);
+    this.extractText(document.body, dom);
   }
 
-  private extractText(node: Node): void {
-    if (node.nodeType === Node.TEXT_NODE) {
+  private extractText(node: HTMLElement | ChildNode, dom: JSDOM): void {
+    if (node.nodeType === dom.window.Node.TEXT_NODE) {
       const text = node.textContent?.trim();
       if (text) {
         this.textParts.push(text);
       }
     } else if (node.hasChildNodes()) {
-      node.childNodes.forEach((child) => this.extractText(child));
+      node.childNodes.forEach((child) => this.extractText(child, dom));
     }
   }
 
