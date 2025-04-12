@@ -8,5 +8,6 @@ export interface CardNames {
 export interface CardInfo {
   names: CardNames;
   cardTexts: string[];
+  storyDescription: string;
   wikiText: string;
 }

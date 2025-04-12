@@ -89,6 +89,7 @@
         <div class="flex flex-col items-center space-y-2">
           <p class="text-gray-700">《{selectedCardInfo.names.fullName}》</p>
           <pre class="bg-gray-100 text-xs p-4 rounded-md">{selectedCardInfo.cardTexts[0]}</pre>
+          <pre class="bg-gray-100 text-xs p-4 rounded-md">{selectedCardInfo.storyDescription}</pre>
         </div>
       {:else if selectedCard}
         <p class="text-gray-700">Fetching card info...</p>

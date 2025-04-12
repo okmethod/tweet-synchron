@@ -50,6 +50,26 @@ export class TagTextExtractor {
   }
 }
 
+export class StorySectionExtractor {
+  public sectionContent: string = "";
+
+  public parse(htmlBuffer: Buffer, encoding: string): void {
+    const decodedHtml = decodeBuffer(htmlBuffer, encoding);
+    const dom = new JSDOM(decodedHtml);
+    const document = dom.window.document;
+
+    // 「原作・アニメにおいて」を含むリスト項目を探して取得
+    const listItem = Array.from(document.querySelectorAll("li")).find((el) =>
+      el.textContent?.trim().startsWith("原作・アニメにおいて"),
+    );
+    this.sectionContent = listItem?.textContent?.trim() ?? "Not found";
+  }
+
+  public getContent(): string {
+    return this.sectionContent;
+  }
+}
+
 export class WikiTextExtractor {
   private textParts: string[] = [];
 

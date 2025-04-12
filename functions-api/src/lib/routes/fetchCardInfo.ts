@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import fetch from "node-fetch";
 import type { ResponseCardInfoJson } from "../types/parser";
-import { TagTextExtractor, WikiTextExtractor } from "../utils/parseHtml.js";
+import { TagTextExtractor, StorySectionExtractor, WikiTextExtractor } from "../utils/parseHtml.js";
 import { encodeEucJp } from "../utils/parseUrl.js";
 import { parseCardNames } from "../utils/processRegex.js";
 
@@ -37,6 +37,11 @@ const fetchCardInfo = async (req: Request, res: Response) => {
     cardTextsExtractor.parse(htmlBuffer, "euc-jp", "pre");
     const cardTexts = cardTextsExtractor.extractedTexts;
 
+    const storySectionExtractor = new StorySectionExtractor();
+    storySectionExtractor.parse(htmlBuffer, "euc-jp");
+    const storySectionContent = storySectionExtractor.getContent();
+    console.log("Story Section Content:", storySectionContent);
+
     const wikiTextExtractor = new WikiTextExtractor();
     wikiTextExtractor.parse(htmlBuffer, "euc-jp");
     const wikiText = wikiTextExtractor.getText();
@@ -44,6 +49,7 @@ const fetchCardInfo = async (req: Request, res: Response) => {
     const responseData: ResponseCardInfoJson = {
       names: cardNames,
       cardTexts: cardTexts,
+      storyDescription: storySectionContent,
       wikiText: wikiText,
     };
     res.json(responseData);
