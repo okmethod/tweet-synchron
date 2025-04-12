@@ -1,6 +1,8 @@
 export interface RequestPostTweetJson {
   accountPassphrase: string;
   tweetText: string;
+  mediaFileBase64?: string;
+  mediaMimeType?: string;
   inReplyToTweetId?: string;
 }
 

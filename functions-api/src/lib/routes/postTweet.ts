@@ -5,7 +5,7 @@ import TwitterApiSingletonMap from "../services/TwitterApiSingleton.js";
 
 const postTweet = async (req: Request, res: Response) => {
   const requestBody: RequestPostTweetJson = req.body;
-  const { accountPassphrase, tweetText, inReplyToTweetId } = requestBody;
+  const { accountPassphrase, tweetText, mediaFileBase64, mediaMimeType, inReplyToTweetId } = requestBody;
   if (!accountPassphrase || !tweetText) {
     console.warn("Missing required parameters:", requestBody);
     res.status(400).json({
@@ -18,9 +18,17 @@ const postTweet = async (req: Request, res: Response) => {
   let tweetResult: TweetV2PostTweetResult;
   try {
     const twitterApi = TwitterApiSingletonMap.getInstance(accountPassphrase);
+
+    let mediaId: string | undefined;
+    if (mediaFileBase64 && mediaMimeType) {
+      const mediaBuffer = Buffer.from(mediaFileBase64, "base64");
+      mediaId = await twitterApi.v1.uploadMedia(mediaBuffer, { mimeType: mediaMimeType });
+    }
+
+    const mediaObj = mediaId ? { media: { media_ids: [mediaId] as [string] } } : undefined;
     tweetResult = inReplyToTweetId
-      ? await twitterApi.v2.reply(tweetText, inReplyToTweetId)
-      : await twitterApi.v2.tweet(tweetText);
+      ? await twitterApi.v2.reply(tweetText, inReplyToTweetId, mediaObj)
+      : await twitterApi.v2.tweet(tweetText, mediaObj);
   } catch (error) {
     console.error("Failed to post tweet:", error);
     res.status(500).json({ error: "Failed to post tweet" });

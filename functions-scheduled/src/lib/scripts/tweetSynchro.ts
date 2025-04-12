@@ -29,7 +29,8 @@ async function tweetSynchro(accountPassphrase: string): Promise<void> {
 
   // ツイートする
   const tweetText = (generatedText: string, monsterName: string) => `${generatedText}\n#${monsterName} #遊戯王`;
-  const { tweetId } = await postPostTweet(fetch, accountPassphrase, tweetText(content, jaName));
+  const cardImageUrl = cardInfo?.cardImages?.[0]?.image_url_small ?? null;
+  const { tweetId } = await postPostTweet(fetch, accountPassphrase, tweetText(content, jaName), cardImageUrl);
   console.log("Tweeted by ID:", tweetId);
 
   return;
