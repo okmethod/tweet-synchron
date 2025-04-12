@@ -1,6 +1,6 @@
 import { defineString } from "firebase-functions/params";
 
-const envs: string[] = ["API_BASE_URL", "API_KEY"] as const;
+const envs: string[] = ["API_BASE_URL"] as const;
 
 const stringParams = envs.reduce(
   (acc, env) => {

@@ -6,19 +6,24 @@ Firebase Hosting で SPA を公開する。
 
 - 各種クレデンシャル情報の設定
 
-  ```sh
-  export GEMINI_API_KEY=(Your Gemini API Key)
-  echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> functions-api/.env
+  ```ini
+  # functions-api/.env
 
-  export TWITTER_API_KEY=(Your Twitter API Key)
-  export TWITTER_API_SECRET_KEY=(Your Twitter API Secret Key)
-  export TWITTER_ACCESS_TOKEN=(Your Twitter Access Token)
-  export TWITTER_ACCESS_TOKEN_SECRET=(Your Twitter Access Token Secret)
-  echo "TWITTER_API_KEY=$TWITTER_API_KEY" >> functions-api/.env
-  echo "TWITTER_API_SECRET_KEY=$TWITTER_API_SECRET_KEY" >> functions-api/.env
-  echo "TWITTER_ACCESS_TOKEN=$TWITTER_ACCESS_TOKEN" >> functions/.env
-  echo "TWITTER_ACCESS_TOKEN_SECRET=$TWITTER_ACCESS_TOKEN_SECRET" >> functions-api/.env
+  export GEMINI_API_KEY=(sensitive)
+
+  export TWITTER_API_KEY=(sensitive)
+  export TWITTER_API_SECRET_KEY=(sensitive)
+  export TWITTER_ACCESS_TOKEN=(sensitive)
+  export TWITTER_ACCESS_TOKEN_SECRET=(sensitive)
   ```
+
+  ```ini
+  # functions-scheduled/.env
+
+  API_BASE_URL=https://api-ydkdbw5xia-an.a.run.app
+  LOCAL_API_BASE_URL=http://functions-api:3000
+  ```
+
 
 - コンテナ起動
 
@@ -40,6 +45,9 @@ Firebase Hosting で SPA を公開する。
 
   # APIのみ
   make deploy-functions-api
+
+  # 定期実行スクリプトのみ
+  make deploy-functions-scheduled
 
   # まとめて
   make deploy

@@ -6,6 +6,9 @@ deploy-app:
 deploy-functions-api:
 	NODE_ENV=production firebase deploy --only functions:api
 
+deploy-functions-scheduled:
+	NODE_ENV=production firebase deploy --only functions:scheduled
+
 deploy:
 	make deploy-functions-api
 	make deploy-app
