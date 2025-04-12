@@ -1,4 +1,4 @@
-import type { CardNames } from "../types/cards";
+import type { CardNames } from "../types/ygowiki";
 
 export function removeAsteriskNumber(entry: string): string {
   /**

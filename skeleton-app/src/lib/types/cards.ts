@@ -1,3 +1,5 @@
+import type { CardNames } from "$lib/types/ygowiki";
+
 export const monsterTypes = [
   "儀式モンスター",
   "融合モンスター",
@@ -6,13 +8,6 @@ export const monsterTypes = [
   "ペンデュラムモンスター",
   "リンクモンスター",
 ] as const;
-
-export interface CardNames {
-  fullText: string;
-  fullName: string;
-  jaName: string;
-  enName: string;
-}
 
 export interface CardInfo {
   names: CardNames;
