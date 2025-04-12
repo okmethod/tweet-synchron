@@ -1,3 +1,5 @@
+import type { UnifiedCardInfo } from "../types/cards";
+
 export const promptTemplate = `
 # Role
 - あなたは歴戦のプロデュエリスト(決闘者)です。
@@ -28,7 +30,8 @@ export const summonTypes = [
 
 export type SummonType = (typeof summonTypes)[number];
 
-export const promptEmbedment = (monsterName: string, summonType: string) => `
+export const promptEmbedment = (monsterName: string, summonType: string, cardInfo: UnifiedCardInfo | null) => {
+  let result = `
 
 [Target]
 * Monster Name
@@ -37,3 +40,16 @@ ${monsterName}
 * Summon Type
 ${summonType}
 `;
+
+  if (cardInfo)
+    result += `
+
+* Card Text
+${cardInfo.cardTexts[0]}
+
+* Story Description
+${cardInfo.storyDescription}
+`;
+
+  return result;
+};
