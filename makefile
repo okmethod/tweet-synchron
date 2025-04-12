@@ -4,7 +4,7 @@ deploy-app:
 	firebase deploy --only hosting
 
 deploy-functions-api:
-	firebase deploy --only functions:api
+	NODE_ENV=production firebase deploy --only functions:api
 
 deploy:
 	make deploy-functions-api
