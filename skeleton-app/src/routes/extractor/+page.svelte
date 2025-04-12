@@ -1,8 +1,9 @@
 <script lang="ts">
   import { ProgressBar } from "@skeletonlabs/skeleton";
   import { monsterTypes, type CardInfo } from "$lib/types/cards";
-  import getFetchCardList from "$lib/api/wiki/getFetchCardList";
-  import getFetchCardInfo from "$lib/api/wiki/getFetchCardInfo";
+  import getYgoWikiFetchCardList from "$lib/api/wiki/getFetchCardList";
+  import getYgoWikiFetchCardInfo from "$lib/api/wiki/getFetchCardInfo";
+  import getYgoProDeckCardInfo from "$lib/api/ygoprodeck/getFetchCardInfo";
 
   let currentMonsterType = "";
 
@@ -12,7 +13,7 @@
     if (!currentMonsterType) return;
     isLoading = true;
     try {
-      const response = await getFetchCardList(window.fetch, currentMonsterType);
+      const response = await getYgoWikiFetchCardList(window.fetch, currentMonsterType);
       cardList = response.cardList || [];
     } catch (error) {
       console.error("Failed to fetch card list:", error);
@@ -26,8 +27,10 @@
   let selectedCardInfo: CardInfo | null = null;
   async function fetchCardInfo(cardName: string) {
     try {
-      const response = await getFetchCardInfo(window.fetch, cardName);
-      selectedCardInfo = response || null;
+      const ygoWikiResponse = await getYgoWikiFetchCardInfo(window.fetch, cardName);
+      selectedCardInfo = ygoWikiResponse || null;
+      const ygoProDeckResponse = await getYgoProDeckCardInfo(window.fetch, selectedCardInfo.names.enName);
+      console.log("YgoProDeck Response:", ygoProDeckResponse.data);
     } catch (error) {
       console.error("Failed to fetch card info:", error);
     }
