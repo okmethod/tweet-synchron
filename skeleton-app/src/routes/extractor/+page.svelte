@@ -35,6 +35,12 @@
       console.error("Failed to fetch card info:", error);
     }
   }
+
+  function navigateToGenerator() {
+    if (selectedCard) {
+      window.location.href = `/generator?name=${encodeURIComponent(selectedCard)}`;
+    }
+  }
 </script>
 
 <div class="cRouteBodyStyle">
@@ -98,6 +104,15 @@
           />
           <pre class="bg-gray-100 text-xs p-4 rounded-md">{selectedCardInfo.cardTexts[0]}</pre>
           <pre class="bg-gray-100 text-xs p-4 rounded-md">{selectedCardInfo.storyDescription}</pre>
+
+          <button
+            type="button"
+            on:click={navigateToGenerator}
+            class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 disabled:bg-gray-300"
+            disabled={!selectedCard}
+          >
+            Go to Generator
+          </button>
         </div>
       {:else if selectedCard}
         <p class="text-gray-700">Fetching card info...</p>

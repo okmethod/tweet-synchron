@@ -3,6 +3,7 @@
   import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
   // import { getToastStore, type ToastSettings } from "@skeletonlabs/skeleton";
   import { ProgressBar } from "@skeletonlabs/skeleton";
+  import { page } from "$app/state";
   import { summonTypes, type SummonType } from "$lib/types/summons";
   import postGenText from "$lib/api/postGenText";
   // import postPostTweet from "$lib/api/postPostTweet";
@@ -16,9 +17,13 @@
     promptEmbedment: PromptEmbedment;
   };
 
-  let currentSummonType: SummonType = "シンクロ召喚";
-
   let inputText = "";
+  let currentSummonType: SummonType = "シンクロ召喚";
+  $: {
+    const params = new URLSearchParams(page.url.search);
+    inputText = params.get("name") ?? "";
+  }
+
   let hashTag = "";
   let generatedText = "";
   let isLoading = false;
