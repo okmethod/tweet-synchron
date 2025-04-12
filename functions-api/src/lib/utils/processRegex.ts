@@ -5,14 +5,14 @@ export function removeAsteriskNumber(entry: string): string {
   return entry.replace(/\*\d+/g, "").trim();
 }
 
-export function isEnclosedInBrackets(entry: string): boolean {
+export function isEnclosedInAngleBrackets(entry: string): boolean {
   /**
    * エントリが《》で囲まれているかを判定する
    */
   return /^《.*》$/.test(entry);
 }
 
-export function fetchEnclosingBrackets(entry: string, includeBrackets?: boolean | undefined): string {
+export function fetchEnclosingAngleBrackets(entry: string, includeBrackets?: boolean | undefined): string {
   /**
    * エントリの《》で囲まれた部分のみを取得する
    */

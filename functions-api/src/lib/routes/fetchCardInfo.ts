@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 import type { ResponseCardInfoJson } from "../types/parser";
 import { TagTextExtractor } from "../utils/parseHtml.js";
 import { encodeEucJp } from "../utils/parseUrl.js";
-import { fetchEnclosingBrackets } from "../utils/processRegex.js";
+import { fetchEnclosingAngleBrackets } from "../utils/processRegex.js";
 
 const ygoWikiUrl = "https://yugioh-wiki.net/index.php";
 
@@ -30,14 +30,15 @@ const fetchCardInfo = async (req: Request, res: Response) => {
 
     const h2TagExtractor = new TagTextExtractor();
     h2TagExtractor.parse(htmlBuffer, "euc-jp", "h2");
-    const cardName = fetchEnclosingBrackets(h2TagExtractor.extractedTexts[0], true);
+    const cardNamefullText = h2TagExtractor.extractedTexts[0];
+    const fullName = fetchEnclosingAngleBrackets(cardNamefullText, true);
 
     const cardTextsExtractor = new TagTextExtractor();
     cardTextsExtractor.parse(htmlBuffer, "euc-jp", "pre");
     const cardTexts = cardTextsExtractor.extractedTexts;
 
     const responseData: ResponseCardInfoJson = {
-      name: cardName,
+      name: fullName,
       cardTexts: cardTexts,
       wikiText: "",
     };

@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 import type { ResponseCardListJson } from "../types/parser";
 import { StyleTableExtractor } from "../utils/parseHtml.js";
 import { encodeEucJp } from "../utils/parseUrl.js";
-import { removeAsteriskNumber, isEnclosedInBrackets } from "../utils/processRegex.js";
+import { removeAsteriskNumber, isEnclosedInAngleBrackets } from "../utils/processRegex.js";
 
 const ygoWikiUrl = "https://yugioh-wiki.net/index.php";
 
@@ -33,7 +33,7 @@ const fetchCardList = async (req: Request, res: Response) => {
 
     const cardNames = extractor.tableData
       .map((row) => removeAsteriskNumber(row[0]))
-      .filter((name) => isEnclosedInBrackets(name));
+      .filter((name) => isEnclosedInAngleBrackets(name));
 
     const responseData: ResponseCardListJson = {
       cardList: cardNames,
