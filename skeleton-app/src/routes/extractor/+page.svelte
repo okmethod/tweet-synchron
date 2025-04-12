@@ -82,7 +82,7 @@
             on:change={() => fetchCardInfo(jaName)}
             class="mr-2"
           />
-          <label for={jaName} class="text-gray-700">{jaName}</label>
+          <label for={jaName} class="text-gray-700">《{jaName}》</label>
         </li>
       {/each}
     </ul>

@@ -19,7 +19,7 @@ const fetchCardInfo = async (req: Request, res: Response) => {
   }
 
   try {
-    const encodedPageName = encodeEucJp(jaName);
+    const encodedPageName = encodeEucJp(`《${jaName}》`);
     const url = `${ygoWikiUrl}?${encodedPageName}`;
     const response = await fetch(url);
     if (!response.ok) {

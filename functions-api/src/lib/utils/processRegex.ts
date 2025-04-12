@@ -14,7 +14,7 @@ export function isEnclosedInAngleBrackets(entry: string): boolean {
   return /^《.*》$/.test(entry);
 }
 
-function fetchEnclosingAngleBrackets(entry: string, includeBrackets?: boolean | undefined): string {
+export function fetchEnclosingAngleBrackets(entry: string, includeBrackets?: boolean | undefined): string {
   /**
    * エントリの《》で囲まれた部分のみを取得する
    */
