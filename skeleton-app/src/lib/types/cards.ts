@@ -7,8 +7,15 @@ export const monsterTypes = [
   "リンクモンスター",
 ] as const;
 
+export interface CardNames {
+  fullText: string;
+  fullName: string;
+  jaName: string;
+  enName: string;
+}
+
 export interface CardInfo {
-  name: string;
+  names: CardNames;
   cardTexts: string[];
   wikiText: string;
 }

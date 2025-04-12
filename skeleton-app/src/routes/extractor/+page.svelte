@@ -87,7 +87,7 @@
     <div class="mt-4">
       {#if selectedCardInfo}
         <div class="flex flex-col items-center space-y-2">
-          <p class="text-gray-700">{selectedCardInfo.name}</p>
+          <p class="text-gray-700">《{selectedCardInfo.names.fullName}》</p>
           <pre class="bg-gray-100 text-xs p-4 rounded-md">{selectedCardInfo.cardTexts[0]}</pre>
         </div>
       {:else if selectedCard}
