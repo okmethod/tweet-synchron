@@ -3,7 +3,7 @@
   import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
   // import { getToastStore, type ToastSettings } from "@skeletonlabs/skeleton";
   import { ProgressBar } from "@skeletonlabs/skeleton";
-  import { page } from "$app/state";
+  import { page } from "$app/stores";
   import { summonTypes, type SummonType } from "$lib/types/summons";
   import getFetchCardInfo from "$lib/api/fetchCardInfo";
   import postGenText from "$lib/api/postGenText";
@@ -21,7 +21,7 @@
   let inputText = "";
   let currentSummonType: SummonType = "シンクロ召喚";
   $: {
-    const params = new URLSearchParams(page.url.search);
+    const params = new URLSearchParams($page.url.search);
     inputText = params.get("name") ?? "";
   }
 
