@@ -17,9 +17,13 @@ export async function fetchApi(
   url: string,
   requestConfig: RequestInit,
 ): Promise<Response> {
+  const isAbsoluteUrl = /^https?:\/\//i.test(url);
+
   try {
-    const baseApiUrl = `${process.env.NODE_ENV === "production" ? getEnv("API_BASE_URL") : process.env.LOCAL_API_BASE_URL}`;
-    const response = await fetchFunction(`${baseApiUrl}${url}`, requestConfig);
+    const baseApiUrl = process.env.NODE_ENV === "production" ? getEnv("API_BASE_URL") : process.env.LOCAL_API_BASE_URL;
+    const fullUrl = isAbsoluteUrl ? url : `${baseApiUrl}${url}`;
+
+    const response = await fetchFunction(fullUrl, requestConfig);
     if (!response.ok) {
       console.error("API response:", response.status);
       throw new Error(`Failed to fetch: ${requestConfig.method} ${url}`);
