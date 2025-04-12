@@ -40,7 +40,6 @@ const fetchCardInfo = async (req: Request, res: Response) => {
     const storySectionExtractor = new StorySectionExtractor();
     storySectionExtractor.parse(htmlBuffer, "euc-jp");
     const storySectionContent = storySectionExtractor.getContent();
-    console.log("Story Section Content:", storySectionContent);
 
     const wikiTextExtractor = new WikiTextExtractor();
     wikiTextExtractor.parse(htmlBuffer, "euc-jp");
