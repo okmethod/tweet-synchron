@@ -26,6 +26,7 @@
   let selectedCardInfo: UnifiedCardInfo | null = null;
   async function fetchCardInfo(cardName: string) {
     selectedCardInfo = await getFetchCardInfo(window.fetch, cardName);
+    console.log("Card Info:", selectedCardInfo);
   }
 
   function navigateToGenerator() {

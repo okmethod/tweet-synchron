@@ -31,8 +31,9 @@
   async function generateSummonRemark(): Promise<void> {
     isLoading = true;
     hashTag = inputText;
-    const selectedCardInfo = await getFetchCardInfo(window.fetch, inputText);
-    const prompt = data.promptTemplate + data.promptEmbedment(inputText, currentSummonType, selectedCardInfo);
+    const cardInfo = await getFetchCardInfo(window.fetch, inputText);
+    console.log("Card Info:", cardInfo);
+    const prompt = data.promptTemplate + data.promptEmbedment(inputText, currentSummonType, cardInfo);
     console.log("Prompt:", prompt);
     const { content } = await postGenText(window.fetch, prompt);
     generatedText = content ?? "Failed to generate.";
