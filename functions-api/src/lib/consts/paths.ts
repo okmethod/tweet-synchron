@@ -1,5 +1,5 @@
 export const pathHeartbeat = "/api/heartbeat";
 export const pathGenText = "/api/gen-text";
 export const pathPostTweet = "/api/post-tweet";
-export const pathParseFetchCardList = "/api/fetch-card-list/:pageName";
-export const pathParseFetchCardInfo = "/api/fetch-card-info/:pageName";
+export const pathWikiFetchCardList = "/api/wiki/fetch-card-list/:pageName";
+export const pathWikiFetchCardInfo = "/api/wiki/fetch-card-info/:pageName";

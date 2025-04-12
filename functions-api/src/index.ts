@@ -6,14 +6,14 @@ import {
   pathHeartbeat,
   pathGenText,
   pathPostTweet,
-  pathParseFetchCardList,
-  pathParseFetchCardInfo,
+  pathWikiFetchCardList,
+  pathWikiFetchCardInfo,
 } from "./lib/consts/paths.js";
 import heartbeat from "./lib/routes/heartbeat.js";
 import genText from "./lib/routes/genText.js";
 import postTweet from "./lib/routes/postTweet.js";
-import fetchCardList from "./lib/routes/fetchCardList.js";
-import fetchCardInfo from "./lib/routes/fetchCardInfo.js";
+import wikiFetchCardList from "./lib/routes/wiki/fetchCardList.js";
+import wikiFetchCardInfo from "./lib/routes/wiki/fetchCardInfo.js";
 
 const app = express();
 
@@ -40,8 +40,8 @@ app.use(express.json());
 app.get(pathHeartbeat, heartbeat);
 app.post(pathGenText, genText);
 app.post(pathPostTweet, postTweet);
-app.get(pathParseFetchCardList, fetchCardList);
-app.get(pathParseFetchCardInfo, fetchCardInfo);
+app.get(pathWikiFetchCardList, wikiFetchCardList);
+app.get(pathWikiFetchCardInfo, wikiFetchCardInfo);
 
 setGlobalOptions({ region: "asia-northeast1" });
 

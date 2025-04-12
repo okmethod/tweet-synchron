@@ -1,8 +1,8 @@
 <script lang="ts">
   import { ProgressBar } from "@skeletonlabs/skeleton";
   import { monsterTypes, type CardInfo } from "$lib/types/cards";
-  import getFetchCardList from "$lib/api/getFetchCardList";
-  import getFetchCardInfo from "$lib/api/getFetchCardInfo";
+  import getFetchCardList from "$lib/api/wiki/getFetchCardList";
+  import getFetchCardInfo from "$lib/api/wiki/getFetchCardInfo";
 
   let currentMonsterType = "";
 

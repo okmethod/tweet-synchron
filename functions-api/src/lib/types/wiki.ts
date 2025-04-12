@@ -1,4 +1,4 @@
-import type { CardInfo } from "../types/cards";
+import type { CardInfo } from "./cards";
 
 export interface ResponseCardListJson {
   cardList: string[];

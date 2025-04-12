@@ -1,9 +1,9 @@
 import type { Request, Response } from "express";
 import fetch from "node-fetch";
-import type { ResponseCardListJson } from "../types/parser";
-import { StyleTableExtractor } from "../utils/parseHtml.js";
-import { encodeEucJp } from "../utils/parseUrl.js";
-import { removeAsteriskNumber, isEnclosedInAngleBrackets } from "../utils/processRegex.js";
+import type { ResponseCardListJson } from "../../types/wiki";
+import { StyleTableExtractor } from "../../utils/parseHtml.js";
+import { encodeEucJp } from "../../utils/parseUrl.js";
+import { removeAsteriskNumber, isEnclosedInAngleBrackets } from "../../utils/processRegex.js";
 
 const ygoWikiUrl = "https://yugioh-wiki.net/index.php";
 
