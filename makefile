@@ -1,4 +1,4 @@
-deploy-app:
+deploy-hosting:
 	export VITE_API_PROXY_TARGET=https://api-ydkdbw5xia-an.a.run.app
 	cd skeleton-app && VITE_API_PROXY_TARGET=${VITE_API_PROXY_TARGET} npm run build
 	firebase deploy --only hosting
@@ -14,6 +14,5 @@ deploy-functions:
 	make deploy-functions-scheduled
 
 deploy:
-	make deploy-functions-api
-	make deploy-functions-scheduled
-	make deploy-app
+	make deploy-functions
+	make deploy-hosting
