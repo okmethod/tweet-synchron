@@ -43,12 +43,19 @@ async function tweetSynchro(accountPassphrase: string): Promise<void> {
   console.log("Generated text:", content);
 
   // ツイートする
-  const tweetText = (generatedText: string, monsterName: string) => `${generatedText}\n#${monsterName} #遊戯王`;
+  const tweetText = `${content}\n${normalizedHashTag(jaName)} #遊戯王`;
   const cardImageUrl = cardInfo?.cardImages?.[0]?.image_url_cropped ?? null;
-  const { tweetId } = await postPostTweet(fetch, accountPassphrase, tweetText(content, jaName), cardImageUrl);
+  const { tweetId } = await postPostTweet(fetch, accountPassphrase, tweetText, cardImageUrl);
   console.log("Tweeted by ID:", tweetId);
 
   return;
+}
+
+function normalizedHashTag(text: string): string {
+  const normalizedName = text
+    .replace(/\s+/g, "") // スペースを削除
+    .replace(/[^a-zA-Z0-9一-龠ぁ-んァ-ヶー・]/g, "_"); // 「・」以外の記号を「_」に置き換え
+  return `#${normalizedName}`;
 }
 
 export default tweetSynchro;
