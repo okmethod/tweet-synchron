@@ -1,20 +1,35 @@
 import getFetchCardList from "../api/ygowiki/getFetchCardList.js";
-import getFetchCardInfo from "../api/fetchCardInfo.js";
+import fetchCardInfo from "../api/fetchCardInfo.js";
 import postGenText from "../api/postGenText.js";
 import postPostTweet from "../api/postPostTweet.js";
+import type { UnifiedCardInfo } from "../types/cards";
 import { pickRandomElementsFromArray } from "../utils/pickRandom.js";
 import { promptTemplate, promptEmbedment } from "../constants/prompt.js";
 
 async function tweetSynchro(accountPassphrase: string): Promise<void> {
   console.log("This script tweet about random synchro monster with summon remark.");
 
-  // シンクロモンスターのリストを取得し、ランダムに1体選ぶ
+  // シンクロモンスターのリストを取得し、ランダムに10体選ぶ
   const monsterType = "シンクロモンスター";
   const { jaNames } = await getFetchCardList(fetch, monsterType);
-  const jaName = pickRandomElementsFromArray(jaNames, 1)[0];
+  const pickedJaNames = pickRandomElementsFromArray(jaNames, 10);
 
-  // カード情報を取得する
-  const cardInfo = await getFetchCardInfo(fetch, jaName);
+  // 順番にカード情報を取得し、取得できたらループを抜ける
+  let jaName = pickedJaNames[0];
+  let cardInfo: UnifiedCardInfo | null = null;
+  for (const pickedJaName of pickedJaNames) {
+    jaName = pickedJaName;
+    const fetchedCardInfo = await fetchCardInfo(fetch, pickedJaName);
+    console.log("Fetched CardInfo:", fetchedCardInfo);
+    if (fetchedCardInfo && fetchedCardInfo.cardImages?.length && fetchedCardInfo.cardImages[0].image_url_cropped) {
+      cardInfo = fetchedCardInfo;
+      break;
+    }
+  }
+  if (!cardInfo) {
+    console.error("Fetched monsters without CardInfo.");
+    return;
+  }
 
   // LLMでツイート本文を作成する
   const summonType = "シンクロ召喚";
