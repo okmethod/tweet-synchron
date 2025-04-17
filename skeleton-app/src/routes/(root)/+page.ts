@@ -10,16 +10,16 @@ const contentLinks: TransitionContent[] = [
     target: "/generator",
   },
   {
-    label: "Legendary Summon Remarks",
-    symbolSrc: { type: "icon", key: "mdi:star-circle" },
-    action: "navigate",
-    target: "/legends",
-  },
-  {
     label: "Card Info Extractor",
     symbolSrc: { type: "icon", key: "mdi:star-circle" },
     action: "navigate",
     target: "/extractor",
+  },
+  {
+    label: "Legendary Summon Remarks",
+    symbolSrc: { type: "icon", key: "mdi:star-circle" },
+    action: "navigate",
+    target: "/legends",
   },
   {
     label: "Github Repository",

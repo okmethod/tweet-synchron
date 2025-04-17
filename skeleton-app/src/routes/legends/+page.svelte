@@ -15,10 +15,10 @@
     <h1 class="cTitleStyle">Legendary Summon Remarks</h1>
   </div>
 
-  <div class="cContentPartStyle !space-y-6">
+  <div class="cContentPartStyle !space-y-6 !px-6">
     {#each Object.entries(data.summonRemarksMap) as [duelist, remarks]}
       <div class={cDivStyle}>
-        <h2 class={cDuelistNameStyle}>{duelist}</h2>
+        <h2 class={cDuelistNameStyle}>《{duelist}》</h2>
         <ul class={cListStyle}>
           {#each remarks as remark}
             <li>{remark.text}</li>
