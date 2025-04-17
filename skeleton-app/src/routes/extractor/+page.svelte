@@ -97,7 +97,9 @@
           />
           <pre class="bg-gray-100 text-xs p-4 rounded-md">{selectedCardInfo.cardTexts[0]}</pre>
           <pre class="bg-gray-100 text-xs p-4 rounded-md">{selectedCardInfo.storyDescription}</pre>
-
+          <a href={selectedCardInfo.wikiUrl} target="_blank" class="text-blue-500 hover:underline">
+            View on YGO Wiki
+          </a>
           <button
             type="button"
             on:click={navigateToGenerator}

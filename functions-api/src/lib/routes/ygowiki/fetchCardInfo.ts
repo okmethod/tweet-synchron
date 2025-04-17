@@ -50,6 +50,7 @@ const fetchCardInfo = async (req: Request, res: Response) => {
       cardTexts: cardTexts,
       storyDescription: storySectionContent,
       wikiText: wikiText,
+      wikiUrl: url,
     };
     res.json(responseData);
   } catch (error) {
