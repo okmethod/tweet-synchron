@@ -54,7 +54,7 @@ async function tweetSynchro(accountPassphrase: string): Promise<void> {
 function normalizedHashTag(text: string): string {
   const normalizedName = text
     .replace(/\s+/g, "") // スペースを削除
-    .replace(/[^a-zA-Z0-9一-龠ぁ-んァ-ヶー・]/g, "_"); // 「・」以外の記号を「_」に置き換え
+    .replace(/[^a-zA-Z0-9Ａ-Ｚａ-ｚ０-９一-龠ぁ-んァ-ヶー・]/g, "_"); // 「・」以外の記号を「_」に置き換え
   return `#${normalizedName}`;
 }
 
