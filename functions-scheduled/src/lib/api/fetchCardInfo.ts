@@ -16,6 +16,7 @@ export function uniteCardInfo(
     cardTexts: wikiData.cardTexts,
     storyDescription: wikiData.storyDescription,
     wikiText: wikiData.wikiText,
+    wikiUrl: wikiData.wikiUrl,
 
     id: proDeckData.id,
     type: proDeckData.type,

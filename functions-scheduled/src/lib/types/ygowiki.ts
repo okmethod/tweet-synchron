@@ -14,4 +14,5 @@ export interface ResponseCardInfoJson {
   cardTexts: string[];
   storyDescription: string;
   wikiText: string;
+  wikiUrl: string;
 }

@@ -15,6 +15,7 @@ export interface UnifiedCardInfo {
   cardTexts: string[];
   storyDescription: string;
   wikiText: string;
+  wikiUrl: string;
 
   id?: number;
   type?: string;

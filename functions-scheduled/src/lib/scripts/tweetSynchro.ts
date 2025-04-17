@@ -48,6 +48,11 @@ async function tweetSynchro(accountPassphrase: string): Promise<void> {
   const { tweetId } = await postPostTweet(fetch, accountPassphrase, tweetText, cardImageUrl);
   console.log("Tweeted by ID:", tweetId);
 
+  // 追加情報をリプライする
+  const replyText = `【${jaName}】\n\n${cardInfo.wikiUrl}\n\n${cardInfo.ygoprodeckUrl}`;
+  const { tweetId: replyId } = await postPostTweet(fetch, accountPassphrase, replyText, null, tweetId);
+  console.log("Replied by ID:", replyId);
+
   return;
 }
 
