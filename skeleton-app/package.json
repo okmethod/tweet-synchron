@@ -14,7 +14,7 @@
     "format": "prettier --write .",
     "test:integration": "playwright test",
     "test:unit": "vitest",
-    "deploy": "make -C .. deploy-app"
+    "deploy": "make -C .. deploy-hosting"
   },
   "devDependencies": {
     "@google/generative-ai": "^0.21.0",
