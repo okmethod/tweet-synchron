@@ -16,6 +16,12 @@ const contentLinks: TransitionContent[] = [
     target: "/extractor",
   },
   {
+    label: "Synchrons Explorer",
+    symbolSrc: { type: "icon", key: "mdi:star-circle" },
+    action: "navigate",
+    target: "/synchrons",
+  },
+  {
     label: "Legendary Summon Remarks",
     symbolSrc: { type: "icon", key: "mdi:star-circle" },
     action: "navigate",
